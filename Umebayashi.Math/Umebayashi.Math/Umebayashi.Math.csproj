@@ -39,6 +39,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MathEx\Algebra\Permutation.cs" />
+    <Compile Include="MathEx\Analysis\BetaFunction.cs" />
+    <Compile Include="MathEx\Analysis\GammaFunction.cs" />
+    <Compile Include="MathEx\CalculationUtil.cs" />
+    <Compile Include="MathEx\Collection.cs" />
+    <Compile Include="MathEx\Combinatorics.cs" />
+    <Compile Include="MathEx\Complex.cs" />
+    <Compile Include="MathEx\MathExtension.cs" />
+    <Compile Include="MathEx\Matrix.cs" />
+    <Compile Include="MathEx\Random\Chi2Random.cs" />
+    <Compile Include="MathEx\Random\FRandom.cs" />
+    <Compile Include="MathEx\Random\GammaRandom.cs" />
+    <Compile Include="MathEx\Random\MTRandom.cs" />
+    <Compile Include="MathEx\Random\NormalRandom.cs" />
+    <Compile Include="MathEx\Random\PoissonRandom.cs" />
+    <Compile Include="MathEx\Range.cs" />
+    <Compile Include="MathEx\Statistics\BaseStatistics.cs" />
+    <Compile Include="MathEx\Statistics\ProbabilityDistribution.cs" />
+    <Compile Include="MathEx\Statistics\RegressionAnalysis.cs" />
+    <Compile Include="MathEx\Vector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
