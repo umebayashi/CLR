@@ -4,3 +4,4 @@ obj
 *.suo
 *.log
 /Umebayashi.Math/*.suo
+/Umebayashi.Math/TestResults
