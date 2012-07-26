@@ -160,5 +160,14 @@ namespace Umebayashi.MathEx
 			var m1 = new MatrixD(new double[] { 3.0, 3.0, -1.0, -3.0, 2.0, -5.0, 1.0, 0, 1.0 }, 3, 3, false);
 			var r1 = m1.Inverse();
 		}
+
+		[TestMethod]
+		public void TestTridiagonalize()
+		{
+			var m1 = new MatrixD(new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 1.0, 2.0, 3.0, 3.0, 1.0, 2.0, 3.0, 4.0 }, 4, 4, false);
+			var td1 = m1.Tridiagonalize();
+
+			Console.WriteLine(td1);
+		}
 	}
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SysMath = System.Math;
 
 namespace Umebayashi.MathEx
 {
@@ -192,13 +191,66 @@ namespace Umebayashi.MathEx
 			return new MatrixD(this.Data, rows, columns);
 		}
 
+		/// <summary>
+		/// Householder変換
+		/// </summary>
+		/// <param name="firstValue">変換後のベクトルの最初の成分</param>
+		/// <returns></returns>
+		public VectorD HouseholderTransform(out double firstValue)
+		{
+			double[] array = new double[this.Length];
+			Array.Copy(this.Data, array, this.Length);
+
+			double norm = this.Norm();
+			if (norm != 0)
+			{
+				if (array[0] < 0) { norm = -norm; }
+				array[0] += norm;
+				double weight = 1.0 / Math.Sqrt(array[0] * norm * 2);
+				for (int i = 0; i < array.Length; i++)
+				{
+					array[i] *= weight;
+				}
+			}
+			firstValue = -norm;
+
+			return new VectorD(array);
+		}
+
 		#endregion
 
 		#region static method
 
+		/// <summary>
+		/// ベクトルから行列への変換演算子
+		/// </summary>
+		/// <param name="v"></param>
+		/// <returns></returns>
 		public static explicit operator MatrixD(VectorD v)
 		{
 			return new MatrixD(v.Data, v.Length, 1);
+		}
+
+		/// <summary>
+		/// ベクトルの積(内積)を計算する
+		/// </summary>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
+		/// <returns></returns>
+		public static double operator *(VectorD v1, VectorD v2)
+		{
+			if (v1.Length != v2.Length)
+			{
+				throw new InvalidOperationException("ベクトルの長さが異なります");
+			}
+
+			double result = 0;
+			for (int i = 0; i < v1.Length; i++)
+			{
+				result += v1[i] * v2[i];
+			}
+
+			return result;
 		}
 
 		#endregion
@@ -374,7 +426,7 @@ namespace Umebayashi.MathEx
 			double value = 0.0;
 			vector.ForEach(x => value += x * x);
 
-			return SysMath.Sqrt(value);
+			return Math.Sqrt(value);
 		}
 
 		public static double Norm(this VectorM vector)
@@ -382,7 +434,7 @@ namespace Umebayashi.MathEx
 			double value = 0.0;
 			vector.ForEach(x => value += (double)(x * x));
 
-			return SysMath.Sqrt(value);
+			return Math.Sqrt(value);
 		}
 
 		public static double Norm(this VectorI vector)
@@ -390,7 +442,7 @@ namespace Umebayashi.MathEx
 			double value = 0.0;
 			vector.ForEach(x => value += x * x);
 
-			return SysMath.Sqrt(value);
+			return Math.Sqrt(value);
 		}
 
 		#endregion

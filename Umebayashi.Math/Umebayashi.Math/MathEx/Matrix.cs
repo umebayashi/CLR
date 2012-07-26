@@ -83,6 +83,10 @@ namespace Umebayashi.MathEx
 			{
 				return this.Data[row][column];
 			}
+			protected set
+			{
+				this.Data[row][column] = value;
+			}
 		}
 
 		#endregion
@@ -146,6 +150,17 @@ namespace Umebayashi.MathEx
 			{
 				throw new ArgumentException("列数が一致しません");
 			}
+		}
+
+		public T[] GetRow(int row)
+		{
+			var list = new List<T>();
+			for (int col = 0; col < this.Columns; col++)
+			{
+				list.Add(this[row, col]);
+			}
+
+			return list.ToArray();
 		}
 
 		#endregion
@@ -320,7 +335,7 @@ namespace Umebayashi.MathEx
 		{
 			if (this.Columns != this.Rows)
 			{
-				throw new InvalidOperationException("正方行列でないため逆行列は取得できません");
+				throw new InvalidOperationException("正方行列でないため計算できません");
 			}
 			if (this.Rows < 2)
 			{
@@ -334,6 +349,126 @@ namespace Umebayashi.MathEx
 			}
 
 			return (1 / det) * this.Cofactor();
+		}
+
+		/// <summary>
+		/// 行列をベクトルに変換する
+		/// </summary>
+		/// <returns></returns>
+		public VectorD ToVector()
+		{
+			var list = new List<double>();
+			for (int c = 0; c < this.Columns; c++)
+			{
+				for (int r = 0; r < this.Rows; r++)
+				{
+					list.Add(this[r, c]);
+				}
+			}
+			return new VectorD(list.ToArray());
+		}
+
+		/// <summary>
+		/// 行列ノルムを計算する
+		/// </summary>
+		/// <param name="matrix"></param>
+		/// <param name="normType"></param>
+		/// <returns></returns>
+		public double Norm(MatrixNormType normType = MatrixNormType.O)
+		{
+			switch (normType)
+			{
+				case MatrixNormType.O:
+					return NormO();
+				case MatrixNormType.I:
+					return NormI();
+				case MatrixNormType.F:
+					return NormF();
+				case MatrixNormType.M:
+					return NormM();
+				default:
+					return NormO();
+			}
+		}
+
+		private double NormO()
+		{
+			var sum = new double[this.Columns];
+			for (int r = 0; r < this.Rows; r++)
+			{
+				for (int c = 0; c < this.Columns; c++)
+				{
+					sum[c] += this[r, c];
+				}
+			}
+
+			return sum.Max();
+		}
+
+		private double NormI()
+		{
+			var sum = new double[this.Rows];
+			for (int r = 0; r < this.Rows; r++)
+			{
+				for (int c = 0; c < this.Columns; c++)
+				{
+					sum[r] += this[r, c];
+				}
+			}
+
+			return sum.Max();
+		}
+
+		private double NormF()
+		{
+			var vector = this.ToVector();
+			return vector.Norm();
+		}
+
+		private double NormM()
+		{
+			return this.ToVector().Max;
+		}
+
+		/// <summary>
+		/// 行列を三重対角化する
+		/// </summary>
+		/// <returns></returns>
+		public MatrixD Tridiagonalize()
+		{
+			if (this.Columns != this.Rows)
+			{
+				throw new InvalidOperationException("正方行列でないため計算できません");
+			}
+			if (this.Rows < 2)
+			{
+				throw new InvalidOperationException("2次以上の正方行列である必要があります");
+			}
+
+			var m = this.Clone();
+			
+			int n = m.Rows;
+			double[] d = new double[n];
+			double[] e = new double[n - 1];
+			for (int k = 0; k < n - 2; k++)
+			{
+				double[] row = m.GetRow(k);
+				d[k] = row[k];
+
+				var v = new VectorD(row.Where((x, i) => i >= k + 1).ToArray());
+				double fv;
+				v.HouseholderTransform(out fv);
+				e[k] = fv;
+
+				if (e[k] == 0) continue;
+
+				for (int i = k + 1; i < n; i++)
+				{
+					double s = 0;
+				}
+			}
+
+			return m;
 		}
 
 		/// <summary>
@@ -352,23 +487,6 @@ namespace Umebayashi.MathEx
 			}
 
 			return null;
-		}
-
-		/// <summary>
-		/// 行列をベクトルに変換する
-		/// </summary>
-		/// <returns></returns>
-		public VectorD ToVector()
-		{
-			var list = new List<double>();
-			for (int c = 0; c < this.Columns; c++)
-			{
-				for (int r = 0; r < this.Rows; r++)
-				{
-					list.Add(this[r, c]);
-				}
-			}
-			return new VectorD(list.ToArray());
 		}
 
 		#endregion
@@ -564,77 +682,5 @@ namespace Umebayashi.MathEx
 		/// 固有ベクトル
 		/// </summary>
 		public VectorD Vector { get; set; }
-	}
-
-	/// <summary>
-	/// Matrixクラスの拡張メソッドを定義する
-	/// </summary>
-	public static class MatrixExtension
-	{
-		#region Norm
-
-		/// <summary>
-		/// 行列ノルムを計算する
-		/// </summary>
-		/// <param name="matrix"></param>
-		/// <param name="normType"></param>
-		/// <returns></returns>
-		public static double Norm(this MatrixD matrix, MatrixNormType normType = MatrixNormType.O)
-		{
-			switch (normType)
-			{
-				case MatrixNormType.O:
-					return NormO(matrix);
-				case MatrixNormType.I:
-					return NormI(matrix);
-				case MatrixNormType.F:
-					return NormF(matrix);
-				case MatrixNormType.M:
-					return NormM(matrix);
-				default:
-					return NormO(matrix);
-			}
-		}
-
-		private static double NormO(MatrixD matrix)
-		{
-			var sum = new double[matrix.Columns];
-			for (int r = 0; r < matrix.Rows; r++)
-			{
-				for (int c = 0; c < matrix.Columns; c++)
-				{
-					sum[c] += matrix[r, c];
-				}
-			}
-
-			return sum.Max();
-		}
-
-		private static double NormI(MatrixD matrix)
-		{
-			var sum = new double[matrix.Rows];
-			for (int r = 0; r < matrix.Rows; r++)
-			{
-				for (int c = 0; c < matrix.Columns; c++)
-				{
-					sum[r] += matrix[r, c];
-				}
-			}
-
-			return sum.Max();
-		}
-
-		private static double NormF(MatrixD matrix)
-		{
-			var vector = matrix.ToVector();
-			return vector.Norm();
-		}
-
-		private static double NormM(MatrixD matrix)
-		{
-			return matrix.ToVector().Max;
-		}
-
-		#endregion
 	}
 }

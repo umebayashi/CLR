@@ -148,5 +148,18 @@ namespace Umebayashi.MathEx
 
 			//var sumY = y.Sum();
 		}
+
+		[TestMethod]
+		public void TestHouseholderTransform()
+		{
+			double firstValue;
+			var x = new VectorD(2.0, 2.0, 2.0);
+			var t = x.HouseholderTransform(out firstValue);
+			Console.WriteLine(t);
+			var t2 = t * t;
+			//Assert.AreEqual<double>(1.0, Math.Round(t2, 1));
+			Console.WriteLine(t2);
+			Console.WriteLine(firstValue);
+		}
 	}
 }
