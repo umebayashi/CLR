@@ -169,5 +169,16 @@ namespace Umebayashi.MathEx
 
 			Console.WriteLine(td1);
 		}
+
+		[TestMethod]
+		public void TestHouseholder()
+		{
+			var m1 = new MatrixD(new double[] { 5.0, 2.0, 1.0 }, 3, 1);
+			var m2 = new MatrixD(new double[] { 5.0, 2.0, 1.0 }, 1, 3);
+			var m3 = m1 * m2;
+			Assert.AreEqual<int>(3, m3.Rows);
+			Assert.AreEqual<int>(3, m3.Columns);
+			Console.WriteLine(m3);
+		}
 	}
 }

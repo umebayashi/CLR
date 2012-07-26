@@ -494,6 +494,21 @@ namespace Umebayashi.MathEx
 		#region static method
 
 		/// <summary>
+		/// 単位行列を生成する
+		/// </summary>
+		/// <param name="size"></param>
+		/// <returns></returns>
+		public static MatrixD Identity(int size)
+		{
+			var m = new MatrixD(new double[size * size], size, size);
+			for (int i = 0; i < size; i++)
+			{
+				m[i, i] = 1.0;
+			}
+			return m;
+		}
+
+		/// <summary>
 		/// 行列を加算する
 		/// </summary>
 		/// <param name="item1"></param>
@@ -558,22 +573,20 @@ namespace Umebayashi.MathEx
 				throw new ArgumentException("item1の列数とitem2の行数が一致していません");
 			}
 
-			var list = new List<double[]>();
-			for (int r = 0; r < item1.Rows; r++)
+			var result = new MatrixD(new double[item1.Rows * item2.Columns], item1.Rows, item2.Columns, item1.ByRow);
+
+			for (int r1 = 0; r1 < item1.Rows; r1++)
 			{
-				var array = new double[item2.Columns];
 				for (int c2 = 0; c2 < item2.Columns; c2++)
 				{
 					for (int c1 = 0; c1 < item1.Columns; c1++)
 					{
-						array[c2] += item1[r, c1] * item2[c1, r];
+						result[r1, c2] += item1[r1, c1] * item2[c1, c2];
 					}
 				}
-				list.Add(array);
 			}
-			var data = list.SelectMany(x => x).ToArray();
 
-			return new MatrixD(data, item1.Rows, item2.Columns, item1.ByRow);
+			return result;
 		}
 
 		public static MatrixD Multiply(double coefficient, MatrixD item)
