@@ -8,7 +8,7 @@ namespace Umebayashi.MathEx.Statistics
 	[TestClass]
 	public class ClusterAnalysisTest
 	{
-		public class Data : IEquatable<Data>
+		public class Data : ICoord, IEquatable<Data>, IComparable<Data>
 		{
 			/// <summary>
 			/// 国名
@@ -68,6 +68,16 @@ namespace Umebayashi.MathEx.Statistics
 			{
 				return this.CountryName.Equals(other.CountryName);
 			}
+
+			public int CompareTo(Data other)
+			{
+				throw new NotImplementedException();
+			}
+
+			public VectorD GetCoord()
+			{
+				return new VectorD(this.AIDSPatients, this.NewspaperCirculations);
+			}
 		}
 
 		[TestMethod]
@@ -78,10 +88,10 @@ namespace Umebayashi.MathEx.Statistics
 			analyzer.Analyze(Data.GetAll());
 		}
 
-		private double TestDistanceComparer(IEnumerable<Data> items1, IEnumerable<Data> items2)
+		private double TestDistanceComparer(ClusterNode<Data> item1, ClusterNode<Data> item2)
 		{
-			var v1 = this.CalculateCoord(items1);
-			var v2 = this.CalculateCoord(items2);
+			var v1 = item1.GetCoord();
+			var v2 = item2.GetCoord();
 			var vd = v1 - v2;
 			var distance = vd.Norm();
 

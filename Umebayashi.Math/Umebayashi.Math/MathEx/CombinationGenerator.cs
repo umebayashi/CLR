@@ -12,19 +12,20 @@ namespace Umebayashi.MathEx
 		{
 		}
 
-		public static int CALL_EDITPATTERNS_A = 0;
-		public static int CALL_EDITPATTERNS_B = 0;
-
 		private List<T[]> Result { get; set; }
 		private int SourceLength { get; set; }
 		private int TargetLength { get; set; }
 		private List<bool[]> Patterns { get; set; }
 
+		/// <summary>
+		/// 要素の組み合わせの一覧を作成する
+		/// </summary>
+		/// <param name="source"></param>
+		/// <param name="length"></param>
+		/// <param name="allowDuplicate"></param>
+		/// <returns></returns>
 		public IEnumerable<T[]> Generate(IEnumerable<T> source, int length, bool allowDuplicate = false)
 		{
-			CALL_EDITPATTERNS_A = 0;
-			CALL_EDITPATTERNS_B = 0;
-
 			this.Result = new List<T[]>();
 			this.SourceLength = source.Count();
 			this.TargetLength = length;
@@ -41,8 +42,6 @@ namespace Umebayashi.MathEx
 				{
 					flags[i] = true;
 				}
-				this.Patterns.Add(flags);
-
 				this.EnumPatterns(flags);
 
 				foreach (var pattern in this.Patterns)
@@ -67,31 +66,31 @@ namespace Umebayashi.MathEx
 
 		private void EnumPatterns(bool[] flags)
 		{
-			CALL_EDITPATTERNS_A++;
+			this.Patterns.Add(flags);
 
-			for (int i = 0; i < flags.Length - 1; i++)
+			var stack = new Stack<bool[]>();
+			stack.Push(flags);
+
+			while (stack.Count() > 0)
 			{
-				if (flags[i] && !flags[i + 1])
+				var flags1 = stack.Pop();
+				for (int i = 0; i < flags1.Length - 1; i++)
 				{
-					this.EnumPatterns(flags, i);
+					if (flags1[i] && !flags1[i + 1])
+					{
+						var flags2 = new bool[this.SourceLength];
+						Array.Copy(flags1, flags2, flags1.Length);
+
+						flags2[i] = flags1[i + 1];
+						flags2[i + 1] = flags1[i];
+
+						if (!this.Patterns.Exists(x => x.SequenceEqual(flags2)))
+						{
+							this.Patterns.Add(flags2);
+							stack.Push(flags2);
+						}
+					}
 				}
-			}
-		}
-
-		private void EnumPatterns(bool[] flags, int index)
-		{
-			CALL_EDITPATTERNS_B++;
-
-			var flags2 = new bool[this.SourceLength];
-			Array.Copy(flags, flags2, flags.Length);
-
-			flags2[index] = flags[index + 1];
-			flags2[index + 1] = flags[index];
-
-			if (!this.Patterns.Exists(x => x.SequenceEqual(flags2)))
-			{
-				this.Patterns.Add(flags2);
-				EnumPatterns(flags2);
 			}
 		}
 	}

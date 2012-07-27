@@ -13,21 +13,22 @@ namespace Umebayashi.MathEx
 		public void TestGenerateNotAllowDuplicate()
 		{
 			var generator = new CombinationGenerator<int>();
-			var combinations = generator.Generate(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 6);
+			var combinations = generator.Generate(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 5);
 
+			int count = 0;
 			foreach (var combination in combinations)
 			{
-				WriteArray<int>(combination);
+				WriteArray<int>(combination, ++count);
 			}
 
-			Console.WriteLine("CALL_ENUMPATTERNS_A:{0}", CombinationGenerator<int>.CALL_EDITPATTERNS_A);
-			Console.WriteLine("CALL_ENUMPATTERNS_B:{0}", CombinationGenerator<int>.CALL_EDITPATTERNS_B);
+			Console.WriteLine();
+			Console.Write("組合せ数:{0}", count);
 		}
 
-		private void WriteArray<T>(T[] array)
+		private void WriteArray<T>(T[] array, int count)
 		{
 			var result = new StringBuilder();
-			result.Append("[ ");
+			result.AppendFormat("({0})[ ", count.ToString("000"));
 			for (int i = 0; i < array.Length; i++)
 			{
 				result.Append(array[i]);
