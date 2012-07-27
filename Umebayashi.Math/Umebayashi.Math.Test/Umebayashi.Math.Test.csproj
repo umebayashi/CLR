@@ -6,7 +6,7 @@
     <ProjectGuid>{14018ACE-0CBB-41E8-8EFD-18A50F895927}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Umebayashi.Math.Test</RootNamespace>
+    <RootNamespace>Umebayashi</RootNamespace>
     <AssemblyName>Umebayashi.Math.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -50,24 +50,64 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="MathEx\Algebra\PermutationTest.cs" />
-    <Compile Include="MathEx\Analysis\BetaFunctionTest.cs" />
-    <Compile Include="MathEx\Analysis\GammaFunctionTest.cs" />
-    <Compile Include="MathEx\CalculationUtilTest.cs" />
-    <Compile Include="MathEx\CombinatoricsTest.cs" />
-    <Compile Include="MathEx\ComplexTest.cs" />
-    <Compile Include="MathEx\MatrixTest.cs" />
-    <Compile Include="MathEx\Random\Chi2RandomTest.cs" />
-    <Compile Include="MathEx\Random\FRandomTest.cs" />
-    <Compile Include="MathEx\Random\GammaRandomTest.cs" />
-    <Compile Include="MathEx\Random\MTRandomTest.cs" />
-    <Compile Include="MathEx\Random\NormalRandomTest.cs" />
-    <Compile Include="MathEx\Random\PoissonRandomTest.cs" />
-    <Compile Include="MathEx\RangeTest.cs" />
-    <Compile Include="MathEx\Statistics\BaseStatisticsTest.cs" />
-    <Compile Include="MathEx\Statistics\ProbabilityDistributionTest.cs" />
-    <Compile Include="MathEx\Statistics\RegressionAnalysisTest.cs" />
-    <Compile Include="MathEx\VectorTest.cs" />
+    <Compile Include="MathEx\Algebra\PermutationTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Analysis\BetaFunctionTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Analysis\GammaFunctionTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\CalculationUtilTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\CombinatoricsTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\ComplexTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\MatrixTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Random\Chi2RandomTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Random\FRandomTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Random\GammaRandomTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Random\MTRandomTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Random\NormalRandomTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Random\PoissonRandomTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\RangeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Statistics\BaseStatisticsTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Statistics\ClusterAnalysisTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Statistics\ProbabilityDistributionTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Statistics\RegressionAnalysisTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\CombinationGeneratorTest.cs" />
+    <Compile Include="MathEx\VectorTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

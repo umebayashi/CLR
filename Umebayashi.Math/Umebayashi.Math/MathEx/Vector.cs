@@ -246,7 +246,7 @@ namespace Umebayashi.MathEx
 
 		#endregion
 
-		#region static method
+		#region operator
 
 		/// <summary>
 		/// ベクトルから行列への変換演算子
@@ -256,6 +256,48 @@ namespace Umebayashi.MathEx
 		public static explicit operator MatrixD(VectorD v)
 		{
 			return new MatrixD(v.Data, v.Length, 1);
+		}
+
+		/// <summary>
+		/// ベクトルの和を計算する
+		/// </summary>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
+		/// <returns></returns>
+		public static VectorD operator +(VectorD v1, VectorD v2)
+		{
+			if (v1.Length != v2.Length)
+			{
+				throw new InvalidOperationException("ベクトルの長さが異なります");
+			}
+
+			var result = new VectorD(new double[v1.Length]);
+			for (int i = 0; i < v1.Length; i++)
+			{
+				result[i] = v1[i] + v2[i];
+			}
+			return result;
+		}
+
+		/// <summary>
+		/// ベクトルの差を計算する
+		/// </summary>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
+		/// <returns></returns>
+		public static VectorD operator -(VectorD v1, VectorD v2)
+		{
+			if (v1.Length != v2.Length)
+			{
+				throw new InvalidOperationException("ベクトルの長さが異なります");
+			}
+
+			var result = new VectorD(new double[v1.Length]);
+			for (int i = 0; i < v1.Length; i++)
+			{
+				result[i] = v1[i] - v2[i];
+			}
+			return result;
 		}
 
 		/// <summary>

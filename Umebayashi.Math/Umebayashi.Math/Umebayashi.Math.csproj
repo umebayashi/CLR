@@ -7,7 +7,7 @@
     <ProjectGuid>{C8CEE450-E66E-4359-83B7-9EA32D0D367F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Umebayashi.Math</RootNamespace>
+    <RootNamespace>Umebayashi</RootNamespace>
     <AssemblyName>Umebayashi.Math</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -39,26 +39,71 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MathEx\Algebra\Permutation.cs" />
-    <Compile Include="MathEx\Analysis\BetaFunction.cs" />
-    <Compile Include="MathEx\Analysis\GammaFunction.cs" />
-    <Compile Include="MathEx\CalculationUtil.cs" />
-    <Compile Include="MathEx\Collection.cs" />
-    <Compile Include="MathEx\Combinatorics.cs" />
-    <Compile Include="MathEx\Complex.cs" />
-    <Compile Include="MathEx\MathExtension.cs" />
-    <Compile Include="MathEx\Matrix.cs" />
-    <Compile Include="MathEx\Random\Chi2Random.cs" />
-    <Compile Include="MathEx\Random\FRandom.cs" />
-    <Compile Include="MathEx\Random\GammaRandom.cs" />
-    <Compile Include="MathEx\Random\MTRandom.cs" />
-    <Compile Include="MathEx\Random\NormalRandom.cs" />
-    <Compile Include="MathEx\Random\PoissonRandom.cs" />
-    <Compile Include="MathEx\Range.cs" />
-    <Compile Include="MathEx\Statistics\BaseStatistics.cs" />
-    <Compile Include="MathEx\Statistics\ProbabilityDistribution.cs" />
-    <Compile Include="MathEx\Statistics\RegressionAnalysis.cs" />
-    <Compile Include="MathEx\Vector.cs" />
+    <Compile Include="MathEx\Algebra\Permutation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Analysis\BetaFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Analysis\GammaFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\CalculationUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Collection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\CombinationGenerator.cs" />
+    <Compile Include="MathEx\Combinatorics.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Complex.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\MathExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Matrix.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\PermutationGenerator.cs" />
+    <Compile Include="MathEx\Random\Chi2Random.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Random\FRandom.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Random\GammaRandom.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Random\MTRandom.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Random\NormalRandom.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Random\PoissonRandom.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Range.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Statistics\BaseStatistics.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Statistics\ClusterAnalysis.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Statistics\ProbabilityDistribution.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Statistics\RegressionAnalysis.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MathEx\Vector.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SysMath = System.Math;
 
 namespace Umebayashi.MathEx.Algebra
 {

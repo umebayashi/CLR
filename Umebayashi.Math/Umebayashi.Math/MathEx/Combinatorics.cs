@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Umebayashi.MathEx
 {
-	public interface ICombinatoricsGenerator<T> where T : IComparable<T>, IEquatable<T>
+	public interface ICombinatoricsGenerator<T> where T : IEquatable<T>
 	{
 		void BeginGenerate(Action<T[]> getAction, Action<Exception> errorAction = null);
 	}
 
-	public static class Combinatorics<T> where T : IComparable<T>, IEquatable<T>
+	public static class Combinatorics<T> where T : IEquatable<T>
 	{
 		#region static method
 
