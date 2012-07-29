@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MathEx\Algebra\Permutation.cs">
+    <Compile Include="MathEx\Algebra\PermutationGroup.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MathEx\Analysis\BetaFunction.cs">
@@ -54,7 +54,6 @@
     <Compile Include="MathEx\Collection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MathEx\CombinationGenerator.cs" />
     <Compile Include="MathEx\Combinatorics.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -67,7 +66,6 @@
     <Compile Include="MathEx\Matrix.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MathEx\PermutationGenerator.cs" />
     <Compile Include="MathEx\Random\Chi2Random.cs">
       <SubType>Code</SubType>
     </Compile>

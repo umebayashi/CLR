@@ -50,7 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="MathEx\Algebra\PermutationTest.cs">
+    <Compile Include="MathEx\Algebra\PermutationGroupTest.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MathEx\Analysis\BetaFunctionTest.cs">
@@ -104,7 +104,6 @@
     <Compile Include="MathEx\Statistics\RegressionAnalysisTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MathEx\CombinationGeneratorTest.cs" />
     <Compile Include="MathEx\VectorTest.cs">
       <SubType>Code</SubType>
     </Compile>

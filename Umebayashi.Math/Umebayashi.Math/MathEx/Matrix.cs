@@ -163,6 +163,55 @@ namespace Umebayashi.MathEx
 			return list.ToArray();
 		}
 
+		public T[] GetColumn(int column)
+		{
+			var list = new List<T>();
+			for (int row = 0; row < this.Rows; row++)
+			{
+				list.Add(this[row, column]);
+			}
+
+			return list.ToArray();
+		}
+
+		#region validation
+
+		/// <summary>
+		/// 正方行列かどうかのチェックを行う
+		/// </summary>
+		protected void CheckSquare(string message = null)
+		{
+			if (message == null)
+			{
+				message = "正方行列ではありません";
+			}
+
+			if (this.Rows != this.Columns)
+			{
+				throw new InvalidOperationException(message);
+			}
+		}
+
+		/// <summary>
+		/// 行列の次数をチェックする
+		/// </summary>
+		/// <param name="dimension"></param>
+		/// <param name="message"></param>
+		protected void CheckDimension(int dimension, string message = null)
+		{
+			if (message == null)
+			{
+				message = string.Format("次数が{0}未満です", dimension);
+			}
+
+			if (this.Rows < dimension)
+			{
+				throw new InvalidOperationException(message);
+			}
+		}
+
+		#endregion
+
 		#endregion
 	}
 
@@ -210,15 +259,12 @@ namespace Umebayashi.MathEx
 		/// <returns></returns>
 		public double Determinant()
 		{
-			if (this.Rows != this.Columns)
-			{
-				throw new InvalidOperationException("行数と列数が一致しない場合行列式は計算できません");
-			}
+			this.CheckSquare();
 
 			int size = this.Rows;
 
 			// 0,1,...n-1の順列および置換符号情報を取得
-			var permutations = Permutation.Calculate(size);
+			var permutations = PermutationGroup.Calculate(size).ToArray();
 
 			var det = 0.0;
 			for (int i = 0; i < permutations.Length; i++)
@@ -243,14 +289,8 @@ namespace Umebayashi.MathEx
 		/// <returns></returns>
 		public double Cofactor(int x, int y)
 		{
-			if (this.Columns != this.Rows)
-			{
-				throw new InvalidOperationException("正方行列でないため余因子は取得できません");
-			}
-			if (this.Rows < 2)
-			{
-				throw new InvalidOperationException("2次以上の正方行列である必要があります");
-			}
+			this.CheckSquare();
+			this.CheckDimension(2);
 			if ((x < 0) || (this.Columns <= x))
 			{
 				throw new IndexOutOfRangeException("xの値が範囲外です");
@@ -298,14 +338,8 @@ namespace Umebayashi.MathEx
 		/// <returns></returns>
 		public MatrixD Cofactor()
 		{
-			if (this.Columns != this.Rows)
-			{
-				throw new InvalidOperationException("正方行列でないため余因子行列は取得できません");
-			}
-			if (this.Rows < 2)
-			{
-				throw new InvalidOperationException("2次以上の正方行列である必要があります");
-			}
+			this.CheckSquare();
+			this.CheckDimension(2);
 
 			var list = new List<double>();
 			for (int r = 0; r < this.Rows; r++)
@@ -333,14 +367,8 @@ namespace Umebayashi.MathEx
 		/// <returns></returns>
 		public MatrixD Inverse()
 		{
-			if (this.Columns != this.Rows)
-			{
-				throw new InvalidOperationException("正方行列でないため計算できません");
-			}
-			if (this.Rows < 2)
-			{
-				throw new InvalidOperationException("2次以上の正方行列である必要があります");
-			}
+			this.CheckSquare();
+			this.CheckDimension(2);
 
 			var det = this.Determinant();
 			if (det == 0)
@@ -431,19 +459,32 @@ namespace Umebayashi.MathEx
 		}
 
 		/// <summary>
+		/// 行列をQR分解する
+		/// </summary>
+		/// <returns></returns>
+		public QRDecomposeResult QRDecompose()
+		{
+			this.CheckSquare();
+			this.CheckDimension(2);
+
+			return null;
+		}
+
+		private MatrixD Householder(MatrixD m)
+		{
+			var v1 = new VectorD(m.GetColumn(0));
+			var norm = v1.Norm();
+			return null;
+		}
+
+		/// <summary>
 		/// 行列を三重対角化する
 		/// </summary>
 		/// <returns></returns>
 		public MatrixD Tridiagonalize()
 		{
-			if (this.Columns != this.Rows)
-			{
-				throw new InvalidOperationException("正方行列でないため計算できません");
-			}
-			if (this.Rows < 2)
-			{
-				throw new InvalidOperationException("2次以上の正方行列である必要があります");
-			}
+			this.CheckSquare();
+			this.CheckDimension(2);
 
 			var m = this.Clone();
 			
@@ -477,14 +518,8 @@ namespace Umebayashi.MathEx
 		/// <returns></returns>
 		public MatrixDEigen[] Eigens()
 		{
-			if (this.Columns != this.Rows)
-			{
-				throw new InvalidOperationException("正方行列でないため固有値・固有ベクトルは取得できません");
-			}
-			if (this.Rows < 2)
-			{
-				throw new InvalidOperationException("2次以上の正方行列である必要があります");
-			}
+			this.CheckSquare();
+			this.CheckDimension(2);
 
 			return null;
 		}
@@ -695,5 +730,15 @@ namespace Umebayashi.MathEx
 		/// 固有ベクトル
 		/// </summary>
 		public VectorD Vector { get; set; }
+	}
+
+	/// <summary>
+	/// QR分解結果
+	/// </summary>
+	public class QRDecomposeResult
+	{
+		public MatrixD Q { get; set; }
+
+		public MatrixD R { get; set; }
 	}
 }

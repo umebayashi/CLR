@@ -60,6 +60,55 @@ namespace Umebayashi.MathEx
 		#endregion
 
 		[TestMethod]
+		public void TestGenerateCombinationNotAllowDuplicate()
+		{
+			var generator = new CombinationGenerator<int>();
+			var combinations = generator.Generate(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 5);
+
+			int count = 0;
+			foreach (var combination in combinations)
+			{
+				WriteArray<int>(combination, ++count);
+			}
+
+			Console.WriteLine();
+			Console.Write("組合せ数:{0}", count);
+		}
+
+		[TestMethod]
+		public void TestGeneratePermutationNotAllowDuplicate()
+		{
+			var generator = new PermutationGenerator<int>();
+			var permutations = generator.Generate(new int[] { 0, 1, 2, 3, 4 }, 3);
+
+			int count = 0;
+			foreach (var permutation in permutations)
+			{
+				WriteArray<int>(permutation, ++count);
+			}
+
+			Console.WriteLine();
+			Console.Write("順列数:{0}", count);
+		}
+
+		private void WriteArray<T>(T[] array, int count)
+		{
+			var result = new StringBuilder();
+			result.AppendFormat("({0})[ ", count.ToString("000"));
+			for (int i = 0; i < array.Length; i++)
+			{
+				result.Append(array[i]);
+				if (i < array.Length - 1)
+				{
+					result.Append(", ");
+				}
+			}
+			result.Append(" ]");
+
+			Console.WriteLine(result.ToString());
+		}
+		/*
+		[TestMethod]
 		public void TestGetPermutationGenerator()
 		{
 			var generator = Combinatorics<int>.GetPermutationGenerator(new int[] { 0, 1, 2, 3, 4 }, 5, false);
@@ -81,5 +130,6 @@ namespace Umebayashi.MathEx
 				Console.WriteLine("]");
 			});
 		}
+		*/
 	}
 }
