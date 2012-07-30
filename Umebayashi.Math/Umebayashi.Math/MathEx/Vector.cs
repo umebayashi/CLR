@@ -23,7 +23,7 @@ namespace Umebayashi.MathEx
 
 		#region field / property
 
-		protected T[] Data { get; private set; }
+		protected internal T[] Data { get; private set; }
 
 		public T this[int index]
 		{
@@ -31,7 +31,7 @@ namespace Umebayashi.MathEx
 			{
 				return this.Data[index];
 			}
-			protected set
+			set
 			{
 				this.Data[index] = value;
 			}
@@ -219,29 +219,6 @@ namespace Umebayashi.MathEx
 			firstValue = -norm;
 
 			return new VectorD(array);
-		}
-
-		/// <summary>
-		/// Householder行列を生成する
-		/// </summary>
-		/// <returns></returns>
-		public MatrixD ToHouseholderMatrix()
-		{
-			VectorD vh = new VectorD(this.Data);
-			var norm = this.Norm();
-			if (this[0] >= 0)
-			{
-				vh[0] += norm;
-			}
-			else
-			{
-				vh[0] -= norm;
-			}
-
-			var mi = MatrixD.Identity(vh.Length);
-			var mvvt = new MatrixD(vh.Data, vh.Length, 1) * new MatrixD(vh.Data, 1, vh.Length);
-			var result = mi - ((2.0 / (vh * vh)) * mvvt);
-			return result;
 		}
 
 		#endregion

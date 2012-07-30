@@ -171,14 +171,12 @@ namespace Umebayashi.MathEx
 		}
 
 		[TestMethod]
-		public void TestHouseholder()
+		public void TestQRDecompose()
 		{
-			var m1 = new MatrixD(new double[] { 5.0, 2.0, 1.0 }, 3, 1);
-			var m2 = new MatrixD(new double[] { 5.0, 2.0, 1.0 }, 1, 3);
-			var m3 = m1 * m2;
-			Assert.AreEqual<int>(3, m3.Rows);
-			Assert.AreEqual<int>(3, m3.Columns);
-			Console.WriteLine(m3);
+			var m1 = new MatrixD(new double[] { 5, 2, 1, -1, 3, 3, 0, 1, -1 }, 3, 3 );
+			var result = m1.QRDecompose();
+			Console.WriteLine(result.Q);
+			Console.WriteLine(result.R);
 		}
 	}
 }

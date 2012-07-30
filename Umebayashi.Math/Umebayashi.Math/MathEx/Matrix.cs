@@ -83,7 +83,7 @@ namespace Umebayashi.MathEx
 			{
 				return this.Data[row][column];
 			}
-			protected set
+			set
 			{
 				this.Data[row][column] = value;
 			}
@@ -467,14 +467,64 @@ namespace Umebayashi.MathEx
 			this.CheckSquare();
 			this.CheckDimension(2);
 
-			return null;
+			MatrixD q, r;
+			QRDecomposeInternal(this, out q, out r);
+
+			return new QRDecomposeResult { Q = q, R = r };
 		}
 
-		private MatrixD Householder(MatrixD m)
+		private static void QRDecomposeInternal(MatrixD m, out MatrixD q, out MatrixD r)
 		{
-			var v1 = new VectorD(m.GetColumn(0));
-			var norm = v1.Norm();
-			return null;
+			var n1 = m.Rows;
+
+			var vh1 = new VectorD(m.GetColumn(0));
+			var norm = vh1.Norm();
+			if (vh1[0] >= 0)
+			{
+				vh1[0] += norm;
+			}
+			else
+			{
+				vh1[0] -= norm;
+			}
+
+			var mi = MatrixD.Identity(vh1.Length);
+			var mvvt = new MatrixD(vh1.Data, n1, 1) * new MatrixD(vh1.Data, 1, n1);
+			q = mi - ((2.0 / (vh1 * vh1)) * mvvt);
+
+			r = q * m;
+			for (int i = 1; i < n1; i++)
+			{
+				r[i, 0] = 0;
+			}
+
+			if (n1 > 2)
+			{
+				var n2 = m.Rows - 1;
+				var m2 = new MatrixD(new double[n2 * n2], n2, n2, m.ByRow);
+				for (int i = 0; i < n2; i++)
+				{
+					for (int j = 0; j < n2; j++)
+					{
+						m2[i, j] = r[i + 1, j + 1];
+					}
+				}
+
+				MatrixD q2, r2;
+				QRDecomposeInternal(m2, out q2, out r2);
+				var q2_adjust = new MatrixD(new double[n1 * n1], n1, n1, m.ByRow);
+				q2_adjust[0, 0] = 1;
+				for (int i = 0; i < n2; i++)
+				{
+					for (int j = 0; j < n2; j++)
+					{
+						q2_adjust[i + 1, j + 1] = q2[i, j];
+						r[i + 1, j + 1] = r2[i, j];
+					}
+				}
+
+				q = q * q2_adjust;
+			}
 		}
 
 		/// <summary>
