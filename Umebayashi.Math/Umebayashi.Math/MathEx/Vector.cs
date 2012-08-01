@@ -143,7 +143,7 @@ namespace Umebayashi.MathEx
 	/// <summary>
 	/// 
 	/// </summary>
-	public class VectorD : Vector<double>
+	public class VectorD : Vector<double>, ICloneable
 	{
 		#region constructor
 
@@ -152,6 +152,16 @@ namespace Umebayashi.MathEx
 		#endregion
 
 		#region method
+
+		public VectorD Clone()
+		{
+			return new VectorD(this.Data);
+		}
+
+		object ICloneable.Clone()
+		{
+			return this.Clone();
+		}
 
 		/// <summary>
 		/// ベクトルの和集合を返す

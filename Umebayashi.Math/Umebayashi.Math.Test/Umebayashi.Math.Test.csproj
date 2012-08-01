@@ -53,6 +53,7 @@
     <Compile Include="MathEx\Algebra\PermutationGroupTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MathEx\Algebra\SLESolverTest.cs" />
     <Compile Include="MathEx\Analysis\BetaFunctionTest.cs">
       <SubType>Code</SubType>
     </Compile>
