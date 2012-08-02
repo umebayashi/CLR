@@ -173,11 +173,15 @@ namespace Umebayashi.MathEx
 		[TestMethod]
 		public void TestQRDecompose()
 		{
-			//var m1 = new MatrixD(new double[] { 5, 2, 1, -1, 3, 3, 0, 1, -1 }, 3, 3 );
-			var m1 = new MatrixD(new double[] { 16, 2, 1, 4, -1, 12, 3, -2, 1, 1, -24, 1, 2, -1, 2, 20 }, 4, 4);
+			var m1 = new MatrixD(new double[] { 5, 2, 1, -1, 3, 3, 0, 1, -1 }, 3, 3 );
+			//var m1 = new MatrixD(new double[] { 16, 2, 1, 4, -1, 12, 3, -2, 1, 1, -24, 1, 2, -1, 2, 20 }, 4, 4);
+			Console.WriteLine(m1);
+
 			var result = m1.QRDecompose();
 			Console.WriteLine(result.Q);
+			Console.WriteLine(result.Q * result.Q.Transpose());
 			Console.WriteLine(result.R);
+			Console.WriteLine(result.Q * result.R);
 		}
 	}
 }

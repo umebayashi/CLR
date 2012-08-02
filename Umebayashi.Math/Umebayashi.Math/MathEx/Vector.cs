@@ -133,6 +133,18 @@ namespace Umebayashi.MathEx
 			}
 		}
 
+		/// <summary>
+		/// ベクトルの要素を交換する
+		/// </summary>
+		/// <param name="index1"></param>
+		/// <param name="index2"></param>
+		public void Swap(int index1, int index2)
+		{
+			var tmp = this[index1];
+			this[index1] = this[index2];
+			this[index2] = tmp;
+		}
+
 		#endregion
 
 		#region static method

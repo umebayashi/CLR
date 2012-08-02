@@ -163,6 +163,32 @@ namespace Umebayashi.MathEx
 			return list.ToArray();
 		}
 
+		public int GetRowIndex(Func<T[], bool> func)
+		{
+			for (int i = 0; i < this.Rows; i++)
+			{
+				if (func(this.Data[i]))
+				{
+					return i;
+				}
+			}
+
+			return -1;
+		}
+
+		public int GetRowIndex(Func<T[], int, bool> func)
+		{
+			for (int i = 0; i < this.Rows; i++)
+			{
+				if (func(this.Data[i], i))
+				{
+					return i;
+				}
+			}
+
+			return -1;
+		}
+
 		public T[] GetColumn(int column)
 		{
 			var list = new List<T>();
@@ -172,6 +198,21 @@ namespace Umebayashi.MathEx
 			}
 
 			return list.ToArray();
+		}
+
+		/// <summary>
+		/// 行列の行の値を交換する
+		/// </summary>
+		/// <param name="rowIndex1"></param>
+		/// <param name="rowIndex2"></param>
+		public void SwapRow(int rowIndex1, int rowIndex2)
+		{
+			for (int c = 0; c < this.Columns; c++)
+			{
+				var tmp = this[rowIndex1, c];
+				this[rowIndex1, c] = this[rowIndex2, c];
+				this[rowIndex2, c] = tmp;
+			}
 		}
 
 		#region validation
