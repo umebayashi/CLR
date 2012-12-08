@@ -39,6 +39,7 @@
     <Compile Include="Models\AmidaModel.cs" />
     <Compile Include="Models\LineInfo.cs" />
     <Compile Include="Models\BridgeInfo.cs" />
+    <Compile Include="Models\Margin.cs" />
     <Compile Include="Models\StreamInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

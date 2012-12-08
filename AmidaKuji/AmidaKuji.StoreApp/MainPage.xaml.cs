@@ -34,5 +34,10 @@ namespace AmidaKuji.StoreApp
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+		private void cmdRefresh_Click_1(object sender, RoutedEventArgs e)
+		{
+			this.pnlAmida.Refresh();
+		}
     }
 }
