@@ -27,10 +27,12 @@ namespace ColorTile.StoreApp
         {
             this.InitializeComponent();
 
-			this.DataContext = new ColorTileViewModel();
+			this.DataContext = _viewModel;
 			this.rdoRed.IsChecked = true;
 			this.CreateRectangles();
         }
+
+		private ColorTileViewModel _viewModel = new ColorTileViewModel();
 
         /// <summary>
         /// このページがフレームに表示されるときに呼び出されます。

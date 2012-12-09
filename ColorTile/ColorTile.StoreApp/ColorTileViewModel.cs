@@ -24,13 +24,12 @@ namespace ColorTile.StoreApp
 
 		public ColorTileViewModel()
 		{
+			_size = 8;
 		}
 
 		#endregion
 
 		#region field / property
-
-		private SelectionType _selectionType;
 
 		#region IsRedChecked
 
@@ -148,6 +147,15 @@ namespace ColorTile.StoreApp
 		}
 
 		#endregion
+
+		private SelectionType _selectionType;
+
+		private int _size;
+
+		public int Size
+		{
+			get { return _size; }
+		}
 
 		#endregion
 
