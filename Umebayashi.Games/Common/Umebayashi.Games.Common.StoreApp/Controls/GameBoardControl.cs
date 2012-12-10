@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.ApplicationModel;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -21,6 +23,7 @@ namespace Umebayashi.Games.Common.Controls
 
 		public GameBoardControl()
 		{
+			this.Loaded += GameBoardControl_Loaded;
 		}
 
 		#endregion
@@ -42,7 +45,6 @@ namespace Umebayashi.Games.Common.Controls
 			var target = d as GameBoardControl;
 			if (target != null)
 			{
-				target.SetSize();
 			}
 		}
 
@@ -56,15 +58,15 @@ namespace Umebayashi.Games.Common.Controls
 
 		#region SquareColor1
 
-		private static readonly Color SQUARE_COLOR_1_DEFAULT = Colors.White;
+		private static readonly Color SQUARE_BACKGROUND_1_DEFAULT = Colors.White;
 
-		public static readonly DependencyProperty SquareColor1Property = DependencyProperty.Register(
-			"SquareColor1",
+		public static readonly DependencyProperty SquareBackground1Property = DependencyProperty.Register(
+			"SquareBackground1",
 			typeof(Color),
 			typeof(GameBoardControl),
-			new PropertyMetadata(SQUARE_COLOR_1_DEFAULT, OnSquareColor1Changed));
+			new PropertyMetadata(SQUARE_BACKGROUND_1_DEFAULT, OnSquareBackground1Changed));
 
-		private static void OnSquareColor1Changed(DependencyObject d, DependencyPropertyChangedEventArgs args)
+		private static void OnSquareBackground1Changed(DependencyObject d, DependencyPropertyChangedEventArgs args)
 		{
 			var target = d as GameBoardControl;
 			if (target != null)
@@ -72,25 +74,25 @@ namespace Umebayashi.Games.Common.Controls
 			}
 		}
 
-		public Color SquareColor1
+		public Color SquareBackground1
 		{
-			get { return (Color)GetValue(SquareColor1Property); }
-			set { SetValue(SquareColor1Property, value); }
+			get { return (Color)GetValue(SquareBackground1Property); }
+			set { SetValue(SquareBackground1Property, value); }
 		}
 
 		#endregion
 
 		#region SquareColor2
 
-		private static readonly Color SQUARE_COLOR_2_DEFAULT = Colors.Black;
+		private static readonly Color SQUARE_BACKGROUND_2_DEFAULT = Colors.Black;
 
-		public static readonly DependencyProperty SquareColor2Property = DependencyProperty.Register(
-			"SquareColor2",
+		public static readonly DependencyProperty SquareBackground2Property = DependencyProperty.Register(
+			"SquareBackground2",
 			typeof(Color),
 			typeof(GameBoardControl),
-			new PropertyMetadata(SQUARE_COLOR_1_DEFAULT, OnSquareColor2Changed));
+			new PropertyMetadata(SQUARE_BACKGROUND_1_DEFAULT, OnSquareBackground2Changed));
 
-		private static void OnSquareColor2Changed(DependencyObject d, DependencyPropertyChangedEventArgs args)
+		private static void OnSquareBackground2Changed(DependencyObject d, DependencyPropertyChangedEventArgs args)
 		{
 			var target = d as GameBoardControl;
 			if (target != null)
@@ -98,21 +100,10 @@ namespace Umebayashi.Games.Common.Controls
 			}
 		}
 
-		public Color SquareColor2
+		public Color SquareBackground2
 		{
-			get { return (Color)GetValue(SquareColor2Property); }
-			set { SetValue(SquareColor2Property, value); }
-		}
-
-		#endregion
-
-		#region ViewModel
-
-		private GameBoardViewModel _viewModel;
-
-		protected GameBoardViewModel ViewModel
-		{
-			get { return _viewModel; }
+			get { return (Color)GetValue(SquareBackground2Property); }
+			set { SetValue(SquareBackground2Property, value); }
 		}
 
 		#endregion
@@ -121,40 +112,57 @@ namespace Umebayashi.Games.Common.Controls
 
 		#region method
 
-		public virtual void SetViewModel(GameBoardViewModel viewModel)
+		private void GameBoardControl_Loaded(object sender, RoutedEventArgs e)
 		{
-			_viewModel = viewModel;
-			this.DataContext = viewModel;
+			this.InitializeGameBoard();
 		}
 
-		protected virtual void SetSize()
+		protected virtual void InitializeGameBoard()
 		{
-			this.Children.Clear();
-			this.RowDefinitions.Clear();
-			this.ColumnDefinitions.Clear();
-
-			for (int i = 0; i < this.ViewModel.Size; i++)
+			if (DesignMode.DesignModeEnabled)
 			{
-				this.RowDefinitions.Add(new RowDefinition());
-				this.ColumnDefinitions.Add(new ColumnDefinition());
+				this.Background = new SolidColorBrush(Colors.White);
 			}
-
-			if (this.ViewModel != null)
+			else
 			{
-				for (int r = 0; r < this.ViewModel.Size; r++)
+				this.Children.Clear();
+				this.RowDefinitions.Clear();
+				this.ColumnDefinitions.Clear();
+
+				for (int i = 0; i < this.Size; i++)
 				{
-					for (int c = 0; c < this.ViewModel.Size; c++)
+					this.RowDefinitions.Add(new RowDefinition());
+					this.ColumnDefinitions.Add(new ColumnDefinition());
+				}
+
+				for (int r = 0; r < this.Size; r++)
+				{
+					for (int c = 0; c < this.Size; c++)
 					{
-						var vmSquare = this.ViewModel.GetSquareViewModel(r, c);
-						var rectangle = new Rectangle();
+						var ctSquare = this.CreateSquareControl();
+						ctSquare.SetValue(Grid.RowProperty, r);
+						ctSquare.SetValue(Grid.ColumnProperty, c);
 
-						rectangle.SetValue(Grid.RowProperty, r);
-						rectangle.SetValue(Grid.ColumnProperty, c);
+						Color background;
+						if ((r + c) % 2 == 0)
+						{
+							background = this.SquareBackground1;
+						}
+						else
+						{
+							background = this.SquareBackground2;
+						}
+						ctSquare.Background = new SolidColorBrush(background);
 
-						this.Children.Add(rectangle);
+						this.Children.Add(ctSquare);
 					}
 				}
 			}
+		}
+
+		protected virtual GameBoardSquareControl CreateSquareControl()
+		{
+			return new GameBoardSquareControl();
 		}
 
 		#endregion

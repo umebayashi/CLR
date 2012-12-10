@@ -3,11 +3,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Umebayashi.Games.KnightGame.StoreApp"
+	xmlns:common="using:Umebayashi.Games.Common.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-
+		<common:GameBoardControl x:Name="gbdMain" Size="8" Height="600" Width="600" SquareBackground1="White" SquareBackground2="Black" />
     </Grid>
 </Page>

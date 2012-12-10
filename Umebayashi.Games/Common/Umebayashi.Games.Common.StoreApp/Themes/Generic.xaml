@@ -5,4 +5,17 @@
 
     <Style TargetType="local:GameBoardControl">
     </Style>
+
+    <Style TargetType="local:GameBoardSquareControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:GameBoardSquareControl">
+					<Border 
+						Background="{TemplateBinding Background}" 
+						BorderBrush="{TemplateBinding BorderBrush}"
+						BorderThickness="{TemplateBinding BorderThickness}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

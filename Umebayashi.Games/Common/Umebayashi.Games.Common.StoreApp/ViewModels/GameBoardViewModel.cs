@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Umebayashi.Games.Common.ViewModels
 {
-	public abstract class GameBoardViewModel : ViewModelBase
+	public class GameBoardViewModel : ViewModelBase
 	{
 		#region constructor
 
@@ -41,38 +41,38 @@ namespace Umebayashi.Games.Common.ViewModels
 
 		#endregion
 
-		#region SquareColor1
+		#region SquareBackground1
 
-		private Color _squareColor1;
+		private Color _squareBackground1;
 
 		public Color SquareColor1
 		{
-			get { return _squareColor1; }
+			get { return _squareBackground1; }
 			set
 			{
-				if (_squareColor1 != value)
+				if (_squareBackground1 != value)
 				{
-					_squareColor1 = value;
-					OnPropertyChanged("SquareColor1");
+					_squareBackground1 = value;
+					OnPropertyChanged("SquareBackground1");
 				}
 			}
 		}
 
 		#endregion
 
-		#region SquareColor2
+		#region SquareBackground2
 
-		private Color _squareColor2;
+		private Color _squareBackground2;
 
 		public Color SquareColor2
 		{
-			get { return _squareColor2; }
+			get { return _squareBackground2; }
 			set
 			{
-				if (_squareColor2 != value)
+				if (_squareBackground2 != value)
 				{
-					_squareColor2 = value;
-					OnPropertyChanged("SquareColor2");
+					_squareBackground2 = value;
+					OnPropertyChanged("SquareBackground2");
 				}
 			}
 		}
@@ -89,7 +89,10 @@ namespace Umebayashi.Games.Common.ViewModels
 
 		#region method
 
-		protected abstract GameBoardSquareViewModel CreateSquareViewModel(int row, int column, Color color);
+		protected virtual GameBoardSquareViewModel CreateSquareViewModel(int row, int column, Color background)
+		{
+			return new GameBoardSquareViewModel { Row = row, Column = column, Background = background };
+		}
 
 		protected virtual void OnSizeChanged()
 		{
@@ -99,16 +102,16 @@ namespace Umebayashi.Games.Common.ViewModels
 			{
 				for (int c = 0; c < this.Size; c++)
 				{
-					Color color;
+					Color background;
 					if ((r + c) % 2 == 0)
 					{
-						color = this.SquareColor1;
+						background = this.SquareColor1;
 					}
 					else
 					{
-						color = this.SquareColor2;
+						background = this.SquareColor2;
 					}
-					var square = this.CreateSquareViewModel(r, c, color);
+					var square = this.CreateSquareViewModel(r, c, background);
 
 					_squares.Add(square);
 				}

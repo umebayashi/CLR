@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Umebayashi.Games.Common.ViewModels
 {
-	public abstract class GameBoardSquareViewModel : ViewModelBase
+	public class GameBoardSquareViewModel : ViewModelBase
 	{
 		#region constructor
 		#endregion
@@ -56,17 +56,17 @@ namespace Umebayashi.Games.Common.ViewModels
 
 		#region Color
 
-		private Color _color;
+		private Color _background;
 
-		public Color Color
+		public Color Background
 		{
-			get { return _color; }
+			get { return _background; }
 			set
 			{
-				if (value != _color)
+				if (value != _background)
 				{
-					_color = value;
-					OnPropertyChanged("Color");
+					_background = value;
+					OnPropertyChanged("Background");
 				}
 			}
 		}
