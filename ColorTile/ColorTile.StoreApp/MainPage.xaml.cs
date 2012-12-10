@@ -45,29 +45,49 @@ namespace ColorTile.StoreApp
 
 		private void CreateRectangles()
 		{
-			int count = 8;
-			int unitlen = 64;
+			int size = _viewModel.Size;
+			int unitlen = _viewModel.UnitLength;
 
 			this.grdColor.RowDefinitions.Clear();
 			this.grdColor.ColumnDefinitions.Clear();
-			for (int r = 0; r < count; r++)
+			for (int r = 0; r < size; r++)
 			{
 				this.grdColor.RowDefinitions.Add(new RowDefinition { Height = new GridLength(unitlen) });
 			}
-			for (int c = 0; c < count; c++)
+			for (int c = 0; c < size; c++)
 			{
 				this.grdColor.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(unitlen) });
 			}
 
-			for (int r = 0; r < count; r++)
+			for (int r = 0; r < size; r++)
 			{
-				for (int c = 0; c < count; c++)
+				for (int c = 0; c < size; c++)
 				{
+					var item = _viewModel.GetItem(r, c);
+					var fillBinding = new Binding
+					{
+						Source = item,
+						Path = new PropertyPath("Fill"),
+						Mode = BindingMode.OneWay
+					};
+
 					var rect = new Rectangle();
 					this.grdColor.Children.Add(rect);
 					rect.SetValue(Grid.RowProperty, r);
 					rect.SetValue(Grid.ColumnProperty, c);
-					rect.Fill = new SolidColorBrush(Colors.White);
+					rect.SetBinding(Rectangle.FillProperty, fillBinding);
+
+					//var toolTip = new ToolTip();
+					//var toolTipText = new TextBlock();
+					//var toolTipTextBinding = new Binding
+					//{
+					//	Source = item,
+					//	Path = new PropertyPath("ToolTipText"),
+					//	Mode = BindingMode.OneWay
+					//};
+					//toolTipText.SetBinding(TextBlock.TextProperty, toolTipTextBinding);
+					//toolTip.SetValue(ToolTip.ContentProperty, toolTip);
+					//ToolTipService.SetToolTip(rect, toolTip);
 				}
 			}
 		}

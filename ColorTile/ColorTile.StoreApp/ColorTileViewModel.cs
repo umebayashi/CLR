@@ -4,6 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 
 namespace ColorTile.StoreApp
 {
@@ -24,12 +27,35 @@ namespace ColorTile.StoreApp
 
 		public ColorTileViewModel()
 		{
-			_size = 8;
+			_size = 16;
+			_unitLength = 32;
+			_items = new List<ColorTileItemViewModel>();
+			_alphaValue = 255;
+			this.CreateItems();
 		}
 
 		#endregion
 
 		#region field / property
+
+		#region AlphaValue
+
+		private int _alphaValue;
+
+		public int AlphaValue
+		{
+			get { return _alphaValue; }
+			set
+			{
+				if (value != _alphaValue)
+				{
+					_alphaValue = value;
+					this.HandlePropertyChanged("AlphaValue");
+					this.RefreshItems();
+				}
+			}
+		}
+		#endregion
 
 		#region IsRedChecked
 
@@ -64,6 +90,7 @@ namespace ColorTile.StoreApp
 				{
 					_redValue = value;
 					this.HandlePropertyChanged("RedValue");
+					this.RefreshItems();
 				}
 			}
 		}
@@ -103,6 +130,7 @@ namespace ColorTile.StoreApp
 				{
 					_greenValue = value;
 					this.HandlePropertyChanged("GreenValue");
+					this.RefreshItems();
 				}
 			}
 		}
@@ -142,11 +170,14 @@ namespace ColorTile.StoreApp
 				{
 					_blueValue = value;
 					this.HandlePropertyChanged("BlueValue");
+					this.RefreshItems();
 				}
 			}
 		}
 
 		#endregion
+
+		private List<ColorTileItemViewModel> _items;
 
 		private SelectionType _selectionType;
 
@@ -155,6 +186,13 @@ namespace ColorTile.StoreApp
 		public int Size
 		{
 			get { return _size; }
+		}
+
+		private int _unitLength;
+
+		public int UnitLength
+		{
+			get { return _unitLength; }
 		}
 
 		#endregion
@@ -196,7 +234,55 @@ namespace ColorTile.StoreApp
 						this.GreenValue = 0;
 						break;
 				}
+				this.RefreshItems();
 			}
+		}
+
+		private void CreateItems()
+		{
+			_items.Clear();
+
+			for (int r = 0; r < this.Size; r++)
+			{
+				for (int c = 0; c < this.Size; c++)
+				{
+					_items.Add(new ColorTileItemViewModel { Row = r, Column = c });
+				}
+			}
+		}
+
+		private void RefreshItems()
+		{
+			int diff = (int)(256 / _size);
+
+			for (int r = 0; r < this.Size; r++)
+			{
+				for (int c = 0; c < this.Size; c++)
+				{
+					var item = this.GetItem(r, c);
+					Color color;
+					switch (_selectionType)
+					{
+						case SelectionType.Red:
+							color = Color.FromArgb((byte)this.AlphaValue, (byte)this.RedValue, (byte)(r * diff), (byte)(c * diff));
+							item.Fill = new SolidColorBrush(color);
+							break;
+						case SelectionType.Green:
+							color = Color.FromArgb((byte)this.AlphaValue, (byte)(r * diff), (byte)this.GreenValue, (byte)(c * diff));
+							item.Fill = new SolidColorBrush(color);
+							break;
+						case SelectionType.Blue:
+							color = Color.FromArgb((byte)this.AlphaValue, (byte)(r * diff), (byte)(c * diff), (byte)this.BlueValue);
+							item.Fill = new SolidColorBrush(color);
+							break;
+					}
+				}
+			}
+		}
+
+		public ColorTileItemViewModel GetItem(int row, int column)
+		{
+			return _items.Where(x => x.Row == row && x.Column == column).FirstOrDefault();
 		}
 
 		#endregion

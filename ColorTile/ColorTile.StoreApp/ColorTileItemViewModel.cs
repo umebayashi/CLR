@@ -17,6 +17,33 @@ namespace ColorTile.StoreApp
 
 		#region field / property
 
+		private int _row;
+
+		public int Row
+		{
+			get { return _row; }
+			set
+			{
+				if (value != _row)
+				{
+					_row = value;
+					HandlePropertyChanged("Row");
+				}
+			}
+		}
+
+		private int _column;
+
+		public int Column
+		{
+			get { return _column; }
+			set
+			{
+				_column = value;
+				HandlePropertyChanged("Column");
+			}
+		}
+
 		private Brush _fill;
 
 		public Brush Fill
@@ -28,6 +55,23 @@ namespace ColorTile.StoreApp
 				{
 					_fill = value;
 					HandlePropertyChanged("Fill");
+
+					this.UpdateToolTipText();
+				}
+			}
+		}
+
+		private string _toolTipText;
+
+		public string ToolTipText
+		{
+			get { return _toolTipText; }
+			set
+			{
+				if (value != _toolTipText)
+				{
+					_toolTipText = value;
+					HandlePropertyChanged("ToolTipText");
 				}
 			}
 		}
@@ -48,6 +92,18 @@ namespace ColorTile.StoreApp
 			if (handler != null)
 			{
 				handler(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		private void UpdateToolTipText()
+		{
+			var fill = this.Fill as SolidColorBrush;
+			if (fill != null)
+			{
+				this.ToolTipText = string.Format("R:{0} / G:{1} / B:{2}",
+					fill.Color.R,
+					fill.Color.G,
+					fill.Color.B);
 			}
 		}
 

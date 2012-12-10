@@ -9,13 +9,14 @@
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="160" />
+			<RowDefinition Height="200" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 		
 		<StackPanel Grid.Row="0" Margin="100,10,100,10">
 			<Grid>
 				<Grid.RowDefinitions>
+					<RowDefinition Height="40" />
 					<RowDefinition Height="40" />
 					<RowDefinition Height="40" />
 					<RowDefinition Height="40" />
@@ -29,9 +30,12 @@
 				<RadioButton Grid.Row="1" Grid.Column="0" x:Name="rdoGreen" IsChecked="{Binding IsGreenChecked, Mode=TwoWay}">緑</RadioButton>
 				<RadioButton Grid.Row="2" Grid.Column="0" x:Name="rdoBlue" IsChecked="{Binding IsBlueChecked, Mode=TwoWay}">青</RadioButton>
 				
-				<Slider Grid.Row="0" Grid.Column="1" x:Name="sldRed" Width="1024" IsEnabled="{Binding ElementName=rdoRed, Path=IsChecked}" Maximum="255" SmallChange="16" />
-				<Slider Grid.Row="1" Grid.Column="1" x:Name="sldGreen" Width="1024" IsEnabled="{Binding ElementName=rdoGreen, Path=IsChecked}" Maximum="255" SmallChange="16" />
-				<Slider Grid.Row="2" Grid.Column="1" x:Name="sldBlue" Width="1024" IsEnabled="{Binding ElementName=rdoBlue, Path=IsChecked}" Maximum="255" SmallChange="16" />
+				<Slider Grid.Row="0" Grid.Column="1" x:Name="sldRed" Width="1024" IsEnabled="{Binding ElementName=rdoRed, Path=IsChecked}" Value="{Binding RedValue, Mode=TwoWay}" Maximum="255" SmallChange="16" />
+				<Slider Grid.Row="1" Grid.Column="1" x:Name="sldGreen" Width="1024" IsEnabled="{Binding ElementName=rdoGreen, Path=IsChecked}" Value="{Binding GreenValue, Mode=TwoWay}" Maximum="255" SmallChange="16" />
+				<Slider Grid.Row="2" Grid.Column="1" x:Name="sldBlue" Width="1024" IsEnabled="{Binding ElementName=rdoBlue, Path=IsChecked}" Value="{Binding BlueValue, Mode=TwoWay}" Maximum="255" SmallChange="16" />
+				
+				<TextBlock Grid.Row="3" Grid.Column="0" Text="透過度" FontSize="16" VerticalAlignment="Center" />
+				<Slider Grid.Row="3" Grid.Column="1" x:Name="sldAlpha" Width="1024" Value="{Binding AlphaValue, Mode=TwoWay}" Maximum="255" SmallChange="16" />
 			</Grid>
 		</StackPanel>
 		
