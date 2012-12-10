@@ -4,7 +4,10 @@ using System.IO;
 using System.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.UI;
+using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,7 +33,50 @@ namespace ColorTile.StoreApp
 			this.DataContext = _viewModel;
 			this.rdoRed.IsChecked = true;
 			this.CreateRectangles();
+
+			DisplayProperties.OrientationChanged += DisplayProperties_OrientationChanged;
+			Window.Current.SizeChanged += Current_SizeChanged;
         }
+
+		void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
+		{
+			//throw new NotImplementedException();
+			switch (ApplicationView.Value)
+			{
+				case ApplicationViewState.Filled:
+					break;
+				case ApplicationViewState.FullScreenLandscape:
+					break;
+				case ApplicationViewState.FullScreenPortrait:
+					break;
+				case ApplicationViewState.Snapped:
+					break;
+			}
+		}
+
+		void DisplayProperties_OrientationChanged(object sender)
+		{
+			var orientation = DisplayProperties.CurrentOrientation;
+			switch (orientation)
+			{
+				case DisplayOrientations.Landscape:
+				case DisplayOrientations.LandscapeFlipped:
+				case DisplayOrientations.None:
+					sldAlpha.Width = 1024;
+					sldRed.Width = 1024;
+					sldGreen.Width = 1024;
+					sldBlue.Width = 1024;
+					break;
+
+				case DisplayOrientations.Portrait:
+				case DisplayOrientations.PortraitFlipped:
+					sldAlpha.Width = 512;
+					sldRed.Width = 512;
+					sldGreen.Width = 512;
+					sldBlue.Width = 512;
+					break;
+			}
+		}
 
 		private ColorTileViewModel _viewModel = new ColorTileViewModel();
 
