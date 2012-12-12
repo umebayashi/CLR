@@ -26,10 +26,8 @@ namespace Umebayashi.Games.KnightGame.StoreApp
     {
         public MainPage()
         {
-            this.InitializeComponent();
+			this.InitializeComponent();
         }
-
-		private GameBoardViewModel _viewModel;
 
         /// <summary>
         /// このページがフレームに表示されるときに呼び出されます。
