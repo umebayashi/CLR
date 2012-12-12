@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umebayashi.Games.Common.Sto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umebayashi.Games.KnightGame.StoreApp", "KnightGame\Umebayashi.Games.KnightGame.StoreApp\Umebayashi.Games.KnightGame.StoreApp.csproj", "{F546273A-F959-49A9-9263-2F7212AE7422}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FifteenPuzzle", "FifteenPuzzle", "{DF088E72-BC93-4069-953F-FD05D4E437DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umebayashi.Games.FifteenPuzzle.StoreApp", "FifteenPuzzle\Umebayashi.Games.FifteenPuzzle.StoreApp\Umebayashi.Games.FifteenPuzzle.StoreApp.csproj", "{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +77,30 @@ Global
 		{F546273A-F959-49A9-9263-2F7212AE7422}.Release|x86.ActiveCfg = Release|x86
 		{F546273A-F959-49A9-9263-2F7212AE7422}.Release|x86.Build.0 = Release|x86
 		{F546273A-F959-49A9-9263-2F7212AE7422}.Release|x86.Deploy.0 = Release|x86
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Debug|ARM.ActiveCfg = Debug|ARM
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Debug|ARM.Build.0 = Debug|ARM
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Debug|ARM.Deploy.0 = Debug|ARM
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Debug|x64.ActiveCfg = Debug|x64
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Debug|x64.Build.0 = Debug|x64
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Debug|x64.Deploy.0 = Debug|x64
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Debug|x86.ActiveCfg = Debug|x86
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Debug|x86.Build.0 = Debug|x86
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Debug|x86.Deploy.0 = Debug|x86
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|ARM.ActiveCfg = Release|ARM
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|ARM.Build.0 = Release|ARM
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|ARM.Deploy.0 = Release|ARM
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|x64.ActiveCfg = Release|x64
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|x64.Build.0 = Release|x64
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|x64.Deploy.0 = Release|x64
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|x86.ActiveCfg = Release|x86
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|x86.Build.0 = Release|x86
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,5 +109,6 @@ Global
 		{F546273A-F959-49A9-9263-2F7212AE7422} = {A12861D1-4F2E-4283-AAC4-4804E10AA03B}
 		{1453B926-C53A-4277-94A7-2A7AB3AD2520} = {9A19FF97-C288-4072-9246-8C98D15B4660}
 		{00805B40-193E-4990-935A-988A8A393962} = {9A19FF97-C288-4072-9246-8C98D15B4660}
+		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3} = {DF088E72-BC93-4069-953F-FD05D4E437DE}
 	EndGlobalSection
 EndGlobal

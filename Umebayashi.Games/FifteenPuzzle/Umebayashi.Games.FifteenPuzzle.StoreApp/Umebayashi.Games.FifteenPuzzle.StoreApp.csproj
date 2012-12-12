@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F546273A-F959-49A9-9263-2F7212AE7422}</ProjectGuid>
+    <ProjectGuid>{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Umebayashi.Games.KnightGame.StoreApp</RootNamespace>
-    <AssemblyName>Umebayashi.Games.KnightGame.StoreApp</AssemblyName>
+    <RootNamespace>Umebayashi.Games.FifteenPuzzle.StoreApp</RootNamespace>
+    <AssemblyName>Umebayashi.Games.FifteenPuzzle.StoreApp</AssemblyName>
     <DefaultLanguage>ja-JP</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Umebayashi.Games.KnightGame.StoreApp_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Umebayashi.Games.FifteenPuzzle.StoreApp_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -101,29 +101,25 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\..\Common\Umebayashi.Games.Common.StoreApp\Umebayashi.Games.Common.StoreApp.csproj">
-      <Project>{00805b40-193e-4990-935a-988a8a393962}</Project>
-      <Name>Umebayashi.Games.Common.StoreApp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Common\Umebayashi.Games.Common\Umebayashi.Games.Common.csproj">
-      <Project>{1453b926-c53a-4277-94a7-2a7ab3ad2520}</Project>
-      <Name>Umebayashi.Games.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PuzzleBoard.cs" />
+    <Compile Include="Controls\PuzzlePiece.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\PuzzleBoardViewModel.cs" />
+    <Compile Include="ViewModels\PuzzlePieceViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Umebayashi.Games.KnightGame.StoreApp_TemporaryKey.pfx" />
+    <None Include="Umebayashi.Games.FifteenPuzzle.StoreApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.png" />
@@ -144,9 +140,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <ProjectReference Include="..\..\Common\Umebayashi.Games.Common.StoreApp\Umebayashi.Games.Common.StoreApp.csproj">
+      <Project>{00805b40-193e-4990-935a-988a8a393962}</Project>
+      <Name>Umebayashi.Games.Common.StoreApp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Umebayashi.Games.Common\Umebayashi.Games.Common.csproj">
+      <Project>{1453b926-c53a-4277-94a7-2a7ab3ad2520}</Project>
+      <Name>Umebayashi.Games.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
