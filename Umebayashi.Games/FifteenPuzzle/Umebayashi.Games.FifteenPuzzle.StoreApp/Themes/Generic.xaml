@@ -7,8 +7,6 @@
     </Style>
 
     <Style TargetType="local:PuzzlePiece">
-		<!--<Setter Property="Grid.Row" Value="{Binding Row}" />
-		<Setter Property="Grid.Column" Value="{Binding Column}" />-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:PuzzlePiece">
@@ -22,7 +20,6 @@
 							HorizontalAlignment="Center" 
 							VerticalAlignment="Center"
 							FontSize="{Binding TextFontSize}"
-							FontWeight="{TemplateBinding FontWeight}"
 							Foreground="{Binding TextForeground}"/>
 					</Border>
 				</ControlTemplate>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Text;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -60,7 +61,7 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 				if (_background != value)
 				{
 					_background = value;
-					OnPropertyChanged("Background");
+					this.OnPropertyChanged("Background");
 				}
 			}
 		}
@@ -75,7 +76,7 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 				if (_borderBrush != value)
 				{
 					_borderBrush = value;
-					OnPropertyChanged("BorderBrush");
+					this.OnPropertyChanged("BorderBrush");
 				}
 			}
 		}
@@ -90,7 +91,7 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 				if (_borderThickness != value)
 				{
 					_borderThickness = value;
-					OnPropertyChanged("BorderThickness");
+					this.OnPropertyChanged("BorderThickness");
 				}
 			}
 		}
@@ -105,7 +106,7 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 				if (_textFontSize != value)
 				{
 					_textFontSize = value;
-					OnPropertyChanged("TextFontSize");
+					this.OnPropertyChanged("TextFontSize");
 				}
 			}
 		}
@@ -120,7 +121,7 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 				if (_textForeground != value)
 				{
 					_textForeground = value;
-					OnPropertyChanged("TextForeground");
+					this.OnPropertyChanged("TextForeground");
 				}
 			}
 		}
@@ -135,7 +136,7 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 				if (_textVisibility != value)
 				{
 					_textVisibility = value;
-					OnPropertyChanged("TextVisibility");
+					this.OnPropertyChanged("TextVisibility");
 				}
 			}
 		}
@@ -150,7 +151,7 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 				if (_row != value)
 				{
 					_row = value;
-					OnPropertyChanged("Row");
+					this.OnPropertyChanged("Row");
 				}
 			}
 		}
@@ -165,7 +166,7 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 				if (_column != value)
 				{
 					_column = value;
-					OnPropertyChanged("Column");
+					this.OnPropertyChanged("Column");
 				}
 			}
 		}

@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FifteenPuzzle", "FifteenPuz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umebayashi.Games.FifteenPuzzle.StoreApp", "FifteenPuzzle\Umebayashi.Games.FifteenPuzzle.StoreApp\Umebayashi.Games.FifteenPuzzle.StoreApp.csproj", "{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umebayashi.Games.FifteenPuzzle.Core", "FifteenPuzzle\Umebayashi.Games.FifteenPuzzle.Core\Umebayashi.Games.FifteenPuzzle.Core.csproj", "{3C25ED0D-A62D-44EB-8E46-11ECAAE32B44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,16 @@ Global
 		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|x86.ActiveCfg = Release|x86
 		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|x86.Build.0 = Release|x86
 		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3}.Release|x86.Deploy.0 = Release|x86
+		{3C25ED0D-A62D-44EB-8E46-11ECAAE32B44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C25ED0D-A62D-44EB-8E46-11ECAAE32B44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C25ED0D-A62D-44EB-8E46-11ECAAE32B44}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{3C25ED0D-A62D-44EB-8E46-11ECAAE32B44}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3C25ED0D-A62D-44EB-8E46-11ECAAE32B44}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3C25ED0D-A62D-44EB-8E46-11ECAAE32B44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C25ED0D-A62D-44EB-8E46-11ECAAE32B44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C25ED0D-A62D-44EB-8E46-11ECAAE32B44}.Release|ARM.ActiveCfg = Release|Any CPU
+		{3C25ED0D-A62D-44EB-8E46-11ECAAE32B44}.Release|x64.ActiveCfg = Release|Any CPU
+		{3C25ED0D-A62D-44EB-8E46-11ECAAE32B44}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,5 +122,6 @@ Global
 		{1453B926-C53A-4277-94A7-2A7AB3AD2520} = {9A19FF97-C288-4072-9246-8C98D15B4660}
 		{00805B40-193E-4990-935A-988A8A393962} = {9A19FF97-C288-4072-9246-8C98D15B4660}
 		{A78848E5-1AA8-4A1E-A200-B30A9F43E5C3} = {DF088E72-BC93-4069-953F-FD05D4E437DE}
+		{3C25ED0D-A62D-44EB-8E46-11ECAAE32B44} = {DF088E72-BC93-4069-953F-FD05D4E437DE}
 	EndGlobalSection
 EndGlobal

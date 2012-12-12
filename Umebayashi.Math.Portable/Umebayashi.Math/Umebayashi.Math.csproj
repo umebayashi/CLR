@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1453B926-C53A-4277-94A7-2A7AB3AD2520}</ProjectGuid>
+    <ProjectGuid>{1E35BD30-CFC5-4093-BD96-12EC48424CB3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Umebayashi</RootNamespace>
-    <AssemblyName>Umebayashi.Games.Common</AssemblyName>
+    <RootNamespace>Umebayashi.Math</RootNamespace>
+    <AssemblyName>Umebayashi.Math</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile4</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -36,8 +36,26 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MathEx\Algebra\PermutationGroup.cs" />
+    <Compile Include="MathEx\Algebra\SLESolver.cs" />
+    <Compile Include="MathEx\Analysis\BetaFunction.cs" />
+    <Compile Include="MathEx\Analysis\GammaFunction.cs" />
+    <Compile Include="MathEx\CalculationUtil.cs" />
+    <Compile Include="MathEx\Collection.cs" />
+    <Compile Include="MathEx\Complex.cs" />
+    <Compile Include="MathEx\MathExtension.cs" />
+    <Compile Include="MathEx\Matrix.cs" />
+    <Compile Include="MathEx\Random\Chi2Random.cs" />
+    <Compile Include="MathEx\Random\FRandom.cs" />
+    <Compile Include="MathEx\Random\GammaRandom.cs" />
     <Compile Include="MathEx\Random\MTRandom.cs" />
     <Compile Include="MathEx\Random\NormalRandom.cs" />
+    <Compile Include="MathEx\Random\PoissonRandom.cs" />
+    <Compile Include="MathEx\Range.cs" />
+    <Compile Include="MathEx\Statistics\BaseStatistics.cs" />
+    <Compile Include="MathEx\Statistics\ProbabilityDistribution.cs" />
+    <Compile Include="MathEx\Statistics\RegressionAnalysis.cs" />
+    <Compile Include="MathEx\Vector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

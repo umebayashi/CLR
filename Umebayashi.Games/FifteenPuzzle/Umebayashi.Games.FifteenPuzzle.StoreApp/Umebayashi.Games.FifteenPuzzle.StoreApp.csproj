@@ -154,6 +154,10 @@
       <Project>{1453b926-c53a-4277-94a7-2a7ab3ad2520}</Project>
       <Name>Umebayashi.Games.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Umebayashi.Games.FifteenPuzzle.Core\Umebayashi.Games.FifteenPuzzle.Core.csproj">
+      <Project>{3c25ed0d-a62d-44eb-8e46-11ecaae32b44}</Project>
+      <Name>Umebayashi.Games.FifteenPuzzle.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
