@@ -7,6 +7,7 @@ using Windows.UI.Text;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Umebayashi.Games.Common.ViewModels;
 
@@ -34,17 +35,17 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 			}
 		}
 
-		private bool _isHidden;
+		private bool _isEmpty;
 
-		public bool IsHidden
+		public bool IsEmpty
 		{
-			get { return _isHidden; }
+			get { return _isEmpty; }
 			set
 			{
-				if (_isHidden != value)
+				if (_isEmpty != value)
 				{
-					_isHidden = value;
-					OnPropertyChanged("IsHidden");
+					_isEmpty = value;
+					OnPropertyChanged("IsEmpty");
 
 					this.TextVisibility = value ? Visibility.Collapsed : Visibility.Visible;
 				}
@@ -170,6 +171,15 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 				}
 			}
 		}
+
+		#endregion
+
+		#region method
+
+		public void OnPointerPressed(object sender, PointerRoutedEventArgs e)
+		{
+		}
+
 		#endregion
 	}
 }

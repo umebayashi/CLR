@@ -54,21 +54,21 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.Controls
 
 		#endregion
 
-		//private List<PuzzlePieceViewModel> _pieceViewModels = new List<PuzzlePieceViewModel>();
-		//private List<PuzzlePiece> _pieces = new List<PuzzlePiece>();
-
 		#endregion
 
 		#region method
 
 		private void Reset()
 		{
+			foreach (PuzzlePiece piece in this.Children)
+			{
+				var oldVM = piece.DataContext as PuzzlePieceViewModel;
+				piece.PointerPressed -= oldVM.OnPointerPressed;
+			}
+
 			this.Children.Clear();
 			this.RowDefinitions.Clear();
 			this.ColumnDefinitions.Clear();
-
-			//_pieces.Clear();
-			//_pieceViewModels.Clear();
 
 			for (int i = 0; i < this.Size; i++)
 			{
@@ -76,15 +76,16 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.Controls
 				this.ColumnDefinitions.Add(new ColumnDefinition());
 			}
 
-			var vm = this.DataContext as PuzzleBoardViewModel;
-			if (vm != null)
+			var vmBoard = this.DataContext as PuzzleBoardViewModel;
+			if (vmBoard != null)
 			{
-				for (int i = 0; i < vm.Pieces.Count; i++)
+				foreach (var vmPiece in vmBoard.Pieces)
 				{
 					var piece = new PuzzlePiece();
-					piece.DataContext = vm.Pieces[i];
+					piece.DataContext = vmPiece;
 					piece.SetBinding(Grid.RowProperty, new Binding { Path = new PropertyPath("Row") });
 					piece.SetBinding(Grid.ColumnProperty, new Binding { Path = new PropertyPath("Column") });
+					piece.PointerPressed += vmPiece.OnPointerPressed;
 					this.Children.Add(piece);
 				}
 			}

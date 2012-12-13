@@ -23,6 +23,26 @@ namespace Umebayashi.Games.FifteenPuzzle.Core.Models
 
 		public int Column { get; set; }
 
+		public bool IsEmpty { get; set; }
+
+		#endregion
+
+		#region method
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
+
+		public override string ToString()
+		{
+			return string.Format("(Number: {0} / Row: {1} / Column: {2} / IsEmpty: {3})",
+				this.Number,
+				this.Row,
+				this.Column,
+				this.IsEmpty);
+		}
+
 		#endregion
 	}
 }

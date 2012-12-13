@@ -10,6 +10,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Umebayashi.Games.Common.ViewModels;
+using Umebayashi.Games.FifteenPuzzle.Core.Models;
 
 namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 {
@@ -20,22 +21,21 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 		public PuzzleBoardViewModel()
 		{
 			_pieces = new ObservableCollection<PuzzlePieceViewModel>();
+			_model = new FifteenPuzzleModel();
 		}
 
 		#endregion
 
 		#region field / property
 
-		private int _size;
-
 		public int Size
 		{
-			get { return _size; }
+			get { return _model.Size; }
 			set
 			{
-				if (_size != value)
+				if (_model.Size != value)
 				{
-					_size = value;
+					_model.Size = value;
 					this.OnPropertyChanged("Size");
 					this.Reset();
 				}
@@ -49,6 +49,8 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 			get { return _pieces; }
 		}
 
+		private FifteenPuzzleModel _model;
+
 		#endregion
 
 		#region method
@@ -57,34 +59,28 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 		{
 			this.Pieces.Clear();
 
-			int max = this.Size * this.Size;
-			int number = 1;
-			for (int r = 0; r < this.Size; r++)
+			_model.Initialize();
+			_model.Shuffle();
+			foreach (var mdlPiece in _model.Pieces)
 			{
-				for (int c = 0; c < this.Size; c++)
+				var vmPiece = new PuzzlePieceViewModel
 				{
-					var piece = new PuzzlePieceViewModel
-					{
-						Number = number++,
-						Background = new SolidColorBrush(Colors.White),
-						BorderBrush = new SolidColorBrush(Colors.Black),
-						BorderThickness = new Thickness(5.0),
-						TextFontSize = 48.0,
-						TextForeground = new SolidColorBrush(Colors.Red),
-						Row = r,
-						Column = c
-					};
+					Number = mdlPiece.Number,
+					Row = mdlPiece.Row,
+					Column = mdlPiece.Column,
+					IsEmpty = mdlPiece.IsEmpty,
+					Background = mdlPiece.IsEmpty ? new SolidColorBrush(Colors.Black) : new SolidColorBrush(Colors.White),
+					BorderBrush = new SolidColorBrush(Colors.Black),
+					BorderThickness = new Thickness(5.0),
+					TextFontSize = 48.0,
+					TextForeground = new SolidColorBrush(Colors.Red)
+				};
 
-					if (piece.Number == max)
-					{
-						piece.IsHidden = true;
-						piece.Background = new SolidColorBrush(Colors.Black);
-					}
-
-					this.Pieces.Add(piece);
-				}
+				this.Pieces.Add(vmPiece);
 			}
 		}
+
+		
 
 		#endregion
 	}
