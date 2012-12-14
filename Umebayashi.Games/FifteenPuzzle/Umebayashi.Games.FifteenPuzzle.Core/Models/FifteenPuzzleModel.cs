@@ -51,13 +51,17 @@ namespace Umebayashi.Games.FifteenPuzzle.Core.Models
 				for (int c = 0; c < this.Size; c++)
 				{
 					number++;
-					var piece = new FifteenPuzzlePieceModel
-					{
-						Number = number,
-						Row = r,
-						Column = c,
-						IsEmpty = (number == max)
-					};
+					var piece = new FifteenPuzzlePieceModel(this);
+					piece.Number = number;
+					piece.Row = r;
+					piece.Column = c;
+					piece.IsEmpty = (number == max);
+					//{
+					//	Number = number,
+					//	Row = r,
+					//	Column = c,
+					//	IsEmpty = (number == max)
+					//};
 					this.Pieces.Add(piece);
 				}
 			}
@@ -127,8 +131,37 @@ namespace Umebayashi.Games.FifteenPuzzle.Core.Models
 			piece2.Column = c1;
 		}
 
-		public void MovePiece(int row, int column)
+		public void MovePiece(FifteenPuzzlePieceModel piece)
 		{
+			var pEmpty = this.Pieces.Where(x => x.IsEmpty).First();
+
+			// 下が空白コマか
+			if (piece.Row == pEmpty.Row - 1 && piece.Column == pEmpty.Column)
+			{
+				this.Swap(pEmpty, piece);
+				return;
+			}
+
+			// 左が空白コマか
+			if (piece.Row == pEmpty.Row && piece.Column == pEmpty.Column + 1)
+			{
+				this.Swap(pEmpty, piece);
+				return;
+			}
+
+			// 上が空白コマか
+			if (piece.Row == pEmpty.Row + 1 && piece.Column == pEmpty.Column)
+			{
+				this.Swap(pEmpty, piece);
+				return;
+			}
+
+			// 右が空白コマか
+			if (piece.Row == pEmpty.Row && piece.Column == pEmpty.Column - 1)
+			{
+				this.Swap(pEmpty, piece);
+				return;
+			}
 		}
 
 		#endregion

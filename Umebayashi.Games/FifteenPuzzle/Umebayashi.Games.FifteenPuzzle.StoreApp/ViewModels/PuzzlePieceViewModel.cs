@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,44 +11,76 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Umebayashi.Games.Common.ViewModels;
+using Umebayashi.Games.FifteenPuzzle.Core.Models;
 
 namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 {
 	public class PuzzlePieceViewModel : ViewModelBase
 	{
 		#region constructor
+
+		public PuzzlePieceViewModel(FifteenPuzzlePieceModel model)
+		{
+			_model = model;
+			_model.PropertyChanged += PuzzlePieceModel_PropertyChanged;
+
+			_textVisibility = model.IsEmpty ? Visibility.Collapsed : Visibility.Visible;
+		}
+
 		#endregion
 
 		#region field / property
 
-		private int _number;
+		private FifteenPuzzlePieceModel _model;
 
 		public int Number
 		{
-			get { return _number; }
+			get { return _model.Number; }
 			set
 			{
-				if (_number != value)
+				if (_model.Number != value)
 				{
-					_number = value;
-					OnPropertyChanged("Number");
+					_model.Number = value;
+					this.OnPropertyChanged("Number");
 				}
 			}
 		}
 
-		private bool _isEmpty;
+		public int Row
+		{
+			get { return _model.Row; }
+			set
+			{
+				if (_model.Row != value)
+				{
+					_model.Row = value;
+					this.OnPropertyChanged("Row");
+				}
+			}
+		}
+
+		public int Column
+		{
+			get { return _model.Column; }
+			set
+			{
+				if (_model.Column != value)
+				{
+					_model.Column = value;
+					this.OnPropertyChanged("Column");
+				}
+			}
+		}
 
 		public bool IsEmpty
 		{
-			get { return _isEmpty; }
+			get { return _model.IsEmpty; }
 			set
 			{
-				if (_isEmpty != value)
+				if (_model.IsEmpty != value)
 				{
-					_isEmpty = value;
-					OnPropertyChanged("IsEmpty");
-
-					this.TextVisibility = value ? Visibility.Collapsed : Visibility.Visible;
+					_model.IsEmpty = value;
+					this.OnPropertyChanged("IsEmpty");
 				}
 			}
 		}
@@ -142,42 +175,18 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 			}
 		}
 
-		private int _row;
-
-		public int Row
-		{
-			get { return _row; }
-			set
-			{
-				if (_row != value)
-				{
-					_row = value;
-					this.OnPropertyChanged("Row");
-				}
-			}
-		}
-
-		private int _column;
-
-		public int Column
-		{
-			get { return _column; }
-			set
-			{
-				if (_column != value)
-				{
-					_column = value;
-					this.OnPropertyChanged("Column");
-				}
-			}
-		}
-
 		#endregion
 
 		#region method
 
+		private void PuzzlePieceModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			this.OnPropertyChanged(e.PropertyName);
+		}
+
 		public void OnPointerPressed(object sender, PointerRoutedEventArgs e)
 		{
+			_model.MovePiece();
 		}
 
 		#endregion

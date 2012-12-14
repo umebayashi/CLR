@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="MathEx\Random\MTRandom.cs" />
     <Compile Include="MathEx\Random\NormalRandom.cs" />
+    <Compile Include="Games\Models\ObservableModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

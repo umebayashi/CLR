@@ -63,18 +63,12 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.ViewModels
 			_model.Shuffle();
 			foreach (var mdlPiece in _model.Pieces)
 			{
-				var vmPiece = new PuzzlePieceViewModel
-				{
-					Number = mdlPiece.Number,
-					Row = mdlPiece.Row,
-					Column = mdlPiece.Column,
-					IsEmpty = mdlPiece.IsEmpty,
-					Background = mdlPiece.IsEmpty ? new SolidColorBrush(Colors.Black) : new SolidColorBrush(Colors.White),
-					BorderBrush = new SolidColorBrush(Colors.Black),
-					BorderThickness = new Thickness(5.0),
-					TextFontSize = 48.0,
-					TextForeground = new SolidColorBrush(Colors.Red)
-				};
+				var vmPiece = new PuzzlePieceViewModel(mdlPiece);
+				vmPiece.Background = mdlPiece.IsEmpty ? new SolidColorBrush(Colors.Black) : new SolidColorBrush(Colors.White);
+				vmPiece.BorderBrush = new SolidColorBrush(Colors.Black);
+				vmPiece.BorderThickness = new Thickness(5.0);
+				vmPiece.TextFontSize = 48.0;
+				vmPiece.TextForeground = new SolidColorBrush(Colors.Red);
 
 				this.Pieces.Add(vmPiece);
 			}

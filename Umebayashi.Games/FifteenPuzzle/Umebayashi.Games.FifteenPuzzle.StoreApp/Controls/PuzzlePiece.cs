@@ -53,28 +53,6 @@ namespace Umebayashi.Games.FifteenPuzzle.StoreApp.Controls
 
 		#region method
 
-		protected override void OnPointerPressed(PointerRoutedEventArgs e)
-		{
-			base.OnPointerPressed(e);
-
-			var row = (int)this.GetValue(Grid.RowProperty);
-			var column = (int)this.GetValue(Grid.ColumnProperty);
-
-		}
-
-		protected override void OnPointerMoved(PointerRoutedEventArgs e)
-		{
-			base.OnPointerMoved(e);
-			if (e.Pointer.IsInContact)
-			{
-			}
-		}
-
-		protected override void OnPointerReleased(PointerRoutedEventArgs e)
-		{
-			base.OnPointerReleased(e);
-		}
-
 		#endregion
 	}
 }
