@@ -10,7 +10,7 @@
     mc:Ignorable="d">
 	
 	<Page.Resources>
-		<vm:PuzzleBoardViewModel x:Key="ViewModel" Size="6" />
+		<vm:PuzzleBoardViewModel x:Key="ViewModel" Size="4" />
 	</Page.Resources>
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
