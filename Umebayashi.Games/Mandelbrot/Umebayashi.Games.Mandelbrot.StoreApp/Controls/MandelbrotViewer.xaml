@@ -1,0 +1,29 @@
+﻿<UserControl
+    x:Class="Umebayashi.Games.Mandelbrot.StoreApp.Controls.MandelbrotViewer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Umebayashi.Games.Mandelbrot.StoreApp.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:vm="using:Umebayashi.Games.Mandelbrot.StoreApp.ViewModels"
+    mc:Ignorable="d"
+    d:DesignHeight="700"
+    d:DesignWidth="700">
+	
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+
+		<Image 
+			x:Name="imgMain" 
+			Height="{Binding ImageHeight}" 
+			Width="{Binding ImageWidth}" 
+			Source="{Binding ImageSource}"
+			IsDoubleTapEnabled="True">
+		</Image>
+	</Grid>
+</UserControl>
