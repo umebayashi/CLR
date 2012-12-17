@@ -10,6 +10,6 @@
     mc:Ignorable="d">
 	
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-		<custom:MandelbrotViewer Height="700" Width="700" />
+		<custom:MandelbrotViewer Height="700" Width="900" />
     </Grid>
 </Page>

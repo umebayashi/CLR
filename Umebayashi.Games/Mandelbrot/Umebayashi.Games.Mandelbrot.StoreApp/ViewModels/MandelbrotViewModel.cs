@@ -4,8 +4,10 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.System.Threading;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
@@ -23,16 +25,17 @@ namespace Umebayashi.Games.Mandelbrot.StoreApp.ViewModels
 
 		public MandelbrotViewModel()
 		{
-			_model = new MandelbrotModel(512);
-			_imageHeight = 512;
-			_imageWidth = 512;
+			_imageHeight = 600;
+			_imageWidth = 800;
+
+			this.Model = new MandelbrotModel(512, (int)this.ImageHeight, (int)this.ImageWidth);
 		}
 
 		#endregion
 
 		#region field / property
 
-		private MandelbrotModel _model;
+		private MandelbrotModel Model { get; set; }
 
 		#region ImageSource
 
@@ -97,42 +100,50 @@ namespace Umebayashi.Games.Mandelbrot.StoreApp.ViewModels
 
 		public void Image_Loaded(object sender, RoutedEventArgs args)
 		{
-			this.InitMandelbrot();
+			this.DrawMandelbrot();
 		}
 
 		public void Image_DoubleTapped(object sender, DoubleTappedRoutedEventArgs args)
 		{
 			var point = args.GetPosition((UIElement)sender);
+			this.Model.ZoomIn(point.X, point.Y);
+
+			this.DrawMandelbrot();
 		}
 
 		#endregion
 
 		#region method
 
-		public async void InitMandelbrot()
+		public async void DrawMandelbrot()
 		{
-			var bitmap = new WriteableBitmap(512, 512);
-			byte[] pixels = new byte[4 * bitmap.PixelHeight * bitmap.PixelWidth];
+			//this.Model.Calculate();
+			await ThreadPool.RunAsync(this.CalculateAsync);
 
-			for (int y = 0; y < bitmap.PixelHeight; y++)
+			var bitmap = new WriteableBitmap((int)this.ImageWidth, (int)this.ImageHeight);
+			byte[] buffer = new byte[4 * bitmap.PixelHeight * bitmap.PixelWidth];
+
+			foreach (var pixel in this.Model.Pixels)
 			{
-				for (int x = 0; x < bitmap.PixelWidth; x++)
-				{
-					int index = 4 * (y * bitmap.PixelWidth + x);
-					pixels[index + 0] = 255;	// Blue
-					pixels[index + 1] = 0;		// Green
-					pixels[index + 2] = 255;	// Red
-					pixels[index + 3] = 255;	// Alpha
-				}
+				int index = 4 * ((int)pixel.ScreenPos.Y * bitmap.PixelWidth + (int)pixel.ScreenPos.X);
+				buffer[index + 0] = pixel.Color.Blue;
+				buffer[index + 1] = pixel.Color.Green;
+				buffer[index + 2] = pixel.Color.Red;
+				buffer[index + 3] = pixel.Color.Alpha;
 			}
 
 			using (var stream = bitmap.PixelBuffer.AsStream())
 			{
-				await stream.WriteAsync(pixels, 0, pixels.Length);
+				await stream.WriteAsync(buffer, 0, buffer.Length);
 			}
 			bitmap.Invalidate();
 
 			this.ImageSource = bitmap;
+		}
+
+		private void CalculateAsync(IAsyncAction asyncAction)
+		{
+			this.Model.Calculate();
 		}
 
 		#endregion

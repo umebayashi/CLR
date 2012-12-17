@@ -28,24 +28,5 @@ namespace Umebayashi.Games.Mandelbrot.StoreApp.Controls
 			this.imgMain.Loaded += vm.Image_Loaded;
 			this.imgMain.DoubleTapped += vm.Image_DoubleTapped;
 		}
-
-		private void imgMain_Loaded_1(object sender, RoutedEventArgs e)
-		{
-			var vm = ((Image)sender).DataContext as MandelbrotViewModel;
-			if (vm != null)
-			{
-				vm.InitMandelbrot();
-			}
-		}
-
-		private void imgMain_DoubleTapped_1(object sender, DoubleTappedRoutedEventArgs e)
-		{
-			var point = e.GetPosition((UIElement)sender);
-		}
-
-		private void imgMain_Tapped_1(object sender, TappedRoutedEventArgs e)
-		{
-
-		}
 	}
 }
