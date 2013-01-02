@@ -40,10 +40,9 @@
     <Compile Include="MathEx\Algebra\SLESolver.cs" />
     <Compile Include="MathEx\Analysis\BetaFunction.cs" />
     <Compile Include="MathEx\Analysis\GammaFunction.cs" />
-    <Compile Include="MathEx\CalculationUtil.cs" />
+    <Compile Include="MathEx\MathExtensions.cs" />
     <Compile Include="MathEx\Collection.cs" />
     <Compile Include="MathEx\Complex.cs" />
-    <Compile Include="MathEx\MathExtension.cs" />
     <Compile Include="MathEx\Matrix.cs" />
     <Compile Include="MathEx\Random\Chi2Random.cs" />
     <Compile Include="MathEx\Random\FRandom.cs" />

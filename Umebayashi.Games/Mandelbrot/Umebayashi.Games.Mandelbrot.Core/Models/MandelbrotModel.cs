@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Umebayashi.MathEx;
-
+using Umebayashi.Games.Models;
 namespace Umebayashi.Games.Mandelbrot.Core.Models
 {
-	public class MandelbrotModel
+	public class MandelbrotModel : ObservableModelBase
 	{
 		#region constructor
 
@@ -24,6 +24,11 @@ namespace Umebayashi.Games.Mandelbrot.Core.Models
 		#endregion
 
 		#region method
+
+		public void Calculate()
+		{
+		}
+
 		#endregion
 	}
 }

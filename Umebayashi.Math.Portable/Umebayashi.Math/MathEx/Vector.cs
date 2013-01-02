@@ -114,7 +114,11 @@ namespace Umebayashi.MathEx
 		/// <param name="action"></param>
 		public void ForEach(Action<T> action)
 		{
-			this.Data.ToList().ForEach(action);
+			//this.Data.ToList().ForEach(action);
+			foreach (var item in this.Data)
+			{
+				action(item);
+			}
 		}
 
 		/// <summary>

@@ -42,6 +42,8 @@ namespace Umebayashi.MathEx.Statistics
 			var sorted = data.OrderBy(x => x);
 			int div, rem;
 			//div = SysMath.DivRem(count, 2, out rem);
+			div = count / 2;
+			rem = count % 2;
 			if (rem == 0)
 			{
 				return Mean(new double[] { sorted.ElementAt(div - 1), sorted.ElementAt(div) });

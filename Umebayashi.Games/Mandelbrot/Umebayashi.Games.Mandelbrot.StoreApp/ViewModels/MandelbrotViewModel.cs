@@ -111,7 +111,7 @@ namespace Umebayashi.Games.Mandelbrot.StoreApp.ViewModels
 
 		public async void InitMandelbrot()
 		{
-			var bitmap = new WriteableBitmap(512, 512);
+			var bitmap = new WriteableBitmap((int)this.ImageWidth, (int)this.ImageHeight);
 			byte[] pixels = new byte[4 * bitmap.PixelHeight * bitmap.PixelWidth];
 
 			for (int y = 0; y < bitmap.PixelHeight; y++)

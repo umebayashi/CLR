@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Umebayashi.MathEx
 {
-	public static class CalculationUtil
+	public static class MathExtensions
 	{
 		#region static method
 

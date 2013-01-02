@@ -108,7 +108,7 @@ namespace Umebayashi.MathEx.Algebra
 
 			int length = 0;
 			var listElements = new List<VectorI[]>();
-			while (listPermutation.Count() < MathUtil.Factorial(size))
+			while (listPermutation.Count() < size.Factorial())
 			{
 				length++;
 				listElements.Clear();
@@ -123,7 +123,7 @@ namespace Umebayashi.MathEx.Algebra
 				foreach (var elements in listElements)
 				{
 					var vector = CalculateVector(size, elements);
-					if (!listPermutation.Exists(x => x.Vector.Equals(vector)))
+					if (listPermutation.Where(x => x.Vector.Equals(vector)).Count() == 0)
 					{
 						listPermutation.Add(new PermutationGroup(vector, elements));
 					}
