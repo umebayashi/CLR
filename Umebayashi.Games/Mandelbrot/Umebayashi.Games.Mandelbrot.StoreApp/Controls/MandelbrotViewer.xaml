@@ -8,7 +8,7 @@
 	xmlns:vm="using:Umebayashi.Games.Mandelbrot.StoreApp.ViewModels"
     mc:Ignorable="d"
     d:DesignHeight="700"
-    d:DesignWidth="700">
+    d:DesignWidth="900">
 	
 	<Grid>
 		<Grid.RowDefinitions>
