@@ -40,6 +40,7 @@
     <Compile Include="MathEx\Algebra\SLESolver.cs" />
     <Compile Include="MathEx\Analysis\BetaFunction.cs" />
     <Compile Include="MathEx\Analysis\GammaFunction.cs" />
+    <Compile Include="MathEx\Combinatorics.cs" />
     <Compile Include="MathEx\MathExtensions.cs" />
     <Compile Include="MathEx\Collection.cs" />
     <Compile Include="MathEx\Complex.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="MathEx\Random\PoissonRandom.cs" />
     <Compile Include="MathEx\Range.cs" />
     <Compile Include="MathEx\Statistics\BaseStatistics.cs" />
+    <Compile Include="MathEx\Statistics\ClusterAnalysis.cs" />
     <Compile Include="MathEx\Statistics\ProbabilityDistribution.cs" />
     <Compile Include="MathEx\Statistics\RegressionAnalysis.cs" />
     <Compile Include="MathEx\Vector.cs" />

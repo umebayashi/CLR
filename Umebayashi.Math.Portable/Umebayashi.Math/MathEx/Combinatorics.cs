@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using Umebayashi.MathEx.Algebra;
 
 namespace Umebayashi.MathEx
@@ -103,7 +101,8 @@ namespace Umebayashi.MathEx
 						flags2[i] = flags1[i + 1];
 						flags2[i + 1] = flags1[i];
 
-						if (!this.Patterns.Exists(x => x.SequenceEqual(flags2)))
+						//if (!this.Patterns.Exists(x => x.SequenceEqual(flags2)))
+						if (this.Patterns.Where(x => x.SequenceEqual(flags2)).Count() == 0)
 						{
 							this.Patterns.Add(flags2);
 							stack.Push(flags2);
