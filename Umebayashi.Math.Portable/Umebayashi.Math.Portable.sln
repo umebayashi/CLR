@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umebayashi.Math", "Umebayashi.Math\Umebayashi.Math.csproj", "{1E35BD30-CFC5-4093-BD96-12EC48424CB3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umebayashi.Math.Test", "Umebayashi.Math.Test\Umebayashi.Math.Test.csproj", "{5A592C0E-E9BA-43C0-9688-563DE1B6699D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{1E35BD30-CFC5-4093-BD96-12EC48424CB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E35BD30-CFC5-4093-BD96-12EC48424CB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E35BD30-CFC5-4093-BD96-12EC48424CB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A592C0E-E9BA-43C0-9688-563DE1B6699D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A592C0E-E9BA-43C0-9688-563DE1B6699D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A592C0E-E9BA-43C0-9688-563DE1B6699D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A592C0E-E9BA-43C0-9688-563DE1B6699D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
