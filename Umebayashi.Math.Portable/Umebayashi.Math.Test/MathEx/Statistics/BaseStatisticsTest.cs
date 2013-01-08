@@ -99,7 +99,7 @@ namespace Umebayashi.MathEx.Statistics
 		}
 
 		[TestMethod]
-		public void TestCovariance()
+		public void TestCovariance1()
 		{
 			var data1 = new double[] {
 				6, 10, 6, 10, 5, 3, 5, 9, 3, 3,
@@ -118,7 +118,40 @@ namespace Umebayashi.MathEx.Statistics
 		}
 
 		[TestMethod]
-		public void TestCorrelation()
+		public void TestCovariance2()
+		{
+			var data = new VectorD[] {
+				new VectorD(6, 10),
+				new VectorD(10, 13),
+				new VectorD(6, 8),
+				new VectorD(10, 15),
+				new VectorD(5, 8),
+				new VectorD(3, 6),
+				new VectorD(5, 9),
+				new VectorD(9, 10),
+				new VectorD(3, 7),
+				new VectorD(3, 3),
+				new VectorD(11, 18),
+				new VectorD(6, 14),
+				new VectorD(11, 18),
+				new VectorD(9, 11),
+				new VectorD(7, 12),
+				new VectorD(5, 5),
+				new VectorD(8, 7),
+				new VectorD(7, 12),
+				new VectorD(7, 7),
+				new VectorD(9, 7)
+			};
+
+			var cov1 = BaseStatistics.Covariance(data, VarianceType.Sample);
+			var cov2 = BaseStatistics.Covariance(data, VarianceType.Unbiased);
+
+			Assert.AreEqual<double>(7.55, Math.Round(cov1, 2));
+			Assert.AreEqual<double>(7.947368, Math.Round(cov2, 6));
+		}
+
+		[TestMethod]
+		public void TestCorrelation1()
 		{
 			var data1 = new double[] {
 				6, 10, 6, 10, 5, 3, 5, 9, 3, 3,
@@ -130,6 +163,36 @@ namespace Umebayashi.MathEx.Statistics
 			};
 
 			var cor = BaseStatistics.Correlation(data1, data2);
+
+			Assert.AreEqual<double>(0.749659, Math.Round(cor, 6));
+		}
+
+		[TestMethod]
+		public void TestCorrelation2()
+		{
+			var data = new VectorD[] {
+				new VectorD(6, 10),
+				new VectorD(10, 13),
+				new VectorD(6, 8),
+				new VectorD(10, 15),
+				new VectorD(5, 8),
+				new VectorD(3, 6),
+				new VectorD(5, 9),
+				new VectorD(9, 10),
+				new VectorD(3, 7),
+				new VectorD(3, 3),
+				new VectorD(11, 18),
+				new VectorD(6, 14),
+				new VectorD(11, 18),
+				new VectorD(9, 11),
+				new VectorD(7, 12),
+				new VectorD(5, 5),
+				new VectorD(8, 7),
+				new VectorD(7, 12),
+				new VectorD(7, 7),
+				new VectorD(9, 7)
+			};
+			var cor = BaseStatistics.Correlation(data);
 
 			Assert.AreEqual<double>(0.749659, Math.Round(cor, 6));
 		}

@@ -237,6 +237,32 @@ namespace Umebayashi.MathEx.Statistics
 		}
 
 		/// <summary>
+		/// 共分散
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="type"></param>
+		/// <returns></returns>
+		public static double Covariance(IEnumerable<VectorD> data, VarianceType type = VarianceType.Unbiased)
+		{
+			CheckArgument(data);
+			
+			var n = data.Count();
+			var len = data.First().Length;
+			var mean = data.Aggregate((a, s) => a + s) / data.Count();
+
+			var sum = data.Select(x => (x - mean).Aggregate((a, s) => a * s)).Aggregate((a, s) => a + s);
+
+			if (type == VarianceType.Unbiased)
+			{
+				return sum / (n - 1);
+			}
+			else
+			{
+				return sum / n;
+			}
+		}
+
+		/// <summary>
 		/// 相関係数
 		/// </summary>
 		/// <param name="data1"></param>
@@ -259,6 +285,26 @@ namespace Umebayashi.MathEx.Statistics
 			return cov / (sd1 * sd2);
 		}
 
+		/// <summary>
+		/// 相関係数
+		/// </summary>
+		/// <param name="data"></param>
+		/// <returns></returns>
+		public static double Correlation(IEnumerable<VectorD> data)
+		{
+			CheckArgument(data);
+
+			var len = data.First().Length;
+			var cov = Covariance(data);
+			var sds = new double[len];
+			for (int i = 0; i < len; i++)
+			{
+				sds[i] = StdDev(data.Select(x => x[i]));
+			}
+
+			return cov / sds.Aggregate((a, s) => a * s);
+		}
+
 		#endregion
 
 		#region non public method
@@ -272,6 +318,27 @@ namespace Umebayashi.MathEx.Statistics
 			else if (data.Count() == 0)
 			{
 				throw new ArgumentException("data length is 0", parameterName);
+			}
+		}
+
+		private static void CheckArgument(IEnumerable<VectorD> data, string parameterName = "data")
+		{
+			if (data == null)
+			{
+				throw new ArgumentNullException(parameterName);
+			}
+			else if (data.Count() == 0)
+			{
+				throw new ArgumentException("data length is 0", parameterName);
+			}
+			else
+			{
+				var first = data.First();
+				var len = first.Length;
+				if (data.Where(x => x.Length != len).Count() > 0)
+				{
+					throw new ArgumentException("vector length not match", parameterName);
+				}
 			}
 		}
 

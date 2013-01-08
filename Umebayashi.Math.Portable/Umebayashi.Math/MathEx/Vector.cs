@@ -122,6 +122,15 @@ namespace Umebayashi.MathEx
 		}
 
 		/// <summary>
+		/// ベクトルの要素に対してアキュムレータ関数を適用する
+		/// </summary>
+		/// <param name="func"></param>
+		public T Aggregate(Func<T, T, T> func)
+		{
+			return this.Data.Aggregate(func);
+		}
+
+		/// <summary>
 		/// ベクトルの要素のソートを行う
 		/// </summary>
 		/// <param name="descending"></param>
@@ -315,6 +324,40 @@ namespace Umebayashi.MathEx
 			for (int i = 0; i < v1.Length; i++)
 			{
 				result += v1[i] * v2[i];
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// ベクトルとスカラーの積を計算する
+		/// </summary>
+		/// <param name="v"></param>
+		/// <param name="d"></param>
+		/// <returns></returns>
+		public static VectorD operator *(VectorD v, double d)
+		{
+			var result = new VectorD(new double[v.Length]);
+			for (int i = 0; i < v.Length; i++)
+			{
+				result[i] = v[i] * d;
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// ベクトルとスカラーの商を計算する
+		/// </summary>
+		/// <param name="v"></param>
+		/// <param name="d"></param>
+		/// <returns></returns>
+		public static VectorD operator /(VectorD v, double d)
+		{
+			var result = new VectorD(new double[v.Length]);
+			for (int i = 0; i < v.Length; i++)
+			{
+				result[i] = v[i] / d;
 			}
 
 			return result;
