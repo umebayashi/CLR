@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SysMath = System.Math;
 
 namespace Umebayashi.MathEx.Random
 {
@@ -30,16 +29,16 @@ namespace Umebayashi.MathEx.Random
 				{
 					sw = false;
 
-					t = SysMath.Sqrt(-2 * SysMath.Log(1 - random.NextDouble()));
-					u = 2 * SysMath.PI * random.NextDouble();
+					t = Math.Sqrt(-2 * Math.Log(1 - random.NextDouble()));
+					u = 2 * Math.PI * random.NextDouble();
 
-					return t * SysMath.Cos(u);
+					return t * Math.Cos(u);
 				}
 				else
 				{
 					sw = true;
 
-					return t * SysMath.Sin(u);
+					return t * Math.Sin(u);
 				}
 			}
 		}

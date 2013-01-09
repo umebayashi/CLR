@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SysMath = System.Math;
 
 namespace Umebayashi.MathEx.Random
 {
@@ -36,7 +35,7 @@ namespace Umebayashi.MathEx.Random
 
 		public int Next()
 		{
-			var tmpLambda = SysMath.Exp(this.lambda) * random.NextDouble();
+			var tmpLambda = Math.Exp(this.lambda) * random.NextDouble();
 			int k = 0;
 			while (tmpLambda > 1)
 			{
