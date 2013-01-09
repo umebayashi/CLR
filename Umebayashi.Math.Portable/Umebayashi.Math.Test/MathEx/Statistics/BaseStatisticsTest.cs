@@ -143,8 +143,8 @@ namespace Umebayashi.MathEx.Statistics
 				new VectorD(9, 7)
 			};
 
-			var cov1 = BaseStatistics.Covariance(data, VarianceType.Sample);
-			var cov2 = BaseStatistics.Covariance(data, VarianceType.Unbiased);
+			var cov1 = BaseStatistics.Covariance(data, 0, 1, VarianceType.Sample);
+			var cov2 = BaseStatistics.Covariance(data, 0, 1, VarianceType.Unbiased);
 
 			Assert.AreEqual<double>(7.55, Math.Round(cov1, 2));
 			Assert.AreEqual<double>(7.947368, Math.Round(cov2, 6));
@@ -192,9 +192,33 @@ namespace Umebayashi.MathEx.Statistics
 				new VectorD(7, 7),
 				new VectorD(9, 7)
 			};
-			var cor = BaseStatistics.Correlation(data);
+			var cor = BaseStatistics.Correlation(data, 0, 1);
 
 			Assert.AreEqual<double>(0.749659, Math.Round(cor, 6));
+		}
+
+		[TestMethod]
+		public void TestRankCorrelation1()
+		{
+			var data1 = new double[] {
+				5, 6, 9, 3, 2, 4, 8, 10, 7, 1
+			};
+			var data2 = new double[] {
+				7, 5, 6, 3, 4, 1, 8, 9, 10, 2
+			};
+			var rcor = BaseStatistics.RankCorrelation(data1, data2, RankCorrelationType.Spearmans);
+
+			Assert.AreEqual<double>(0.7697, Math.Round(rcor, 4));
+		}
+
+		[TestMethod]
+		public void TestRankCorrelation2()
+		{
+			var data1 = new double[] { 5, 2, 1, 4, 3 };
+			var data2 = new double[] { 3, 1, 2, 5, 4 };
+			var rcor = BaseStatistics.RankCorrelation(data1, data2, RankCorrelationType.Kendalls);
+
+			Assert.AreEqual<double>(0.4000, Math.Round(rcor, 4));
 		}
 
 		[TestMethod]

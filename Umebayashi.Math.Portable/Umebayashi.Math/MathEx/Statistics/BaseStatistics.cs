@@ -215,10 +215,7 @@ namespace Umebayashi.MathEx.Statistics
 		{
 			CheckArgument(data1, "data1");
 			CheckArgument(data2, "data2");
-			if (data1.Count() != data2.Count())
-			{
-				throw new InvalidOperationException("data1とdata2の要素数が異なるため共分散を計算できません");
-			}
+			CheckArgumentLength(data1, data2);
 
 			var n = data1.Count();
 			var mean1 = Mean(data1);
@@ -242,24 +239,11 @@ namespace Umebayashi.MathEx.Statistics
 		/// <param name="data"></param>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public static double Covariance(IEnumerable<VectorD> data, VarianceType type = VarianceType.Unbiased)
+		public static double Covariance(IEnumerable<VectorD> data, int index1, int index2, VarianceType type = VarianceType.Unbiased)
 		{
 			CheckArgument(data);
-			
-			var n = data.Count();
-			var len = data.First().Length;
-			var mean = data.Aggregate((a, s) => a + s) / data.Count();
 
-			var sum = data.Select(x => (x - mean).Aggregate((a, s) => a * s)).Aggregate((a, s) => a + s);
-
-			if (type == VarianceType.Unbiased)
-			{
-				return sum / (n - 1);
-			}
-			else
-			{
-				return sum / n;
-			}
+			return Covariance(data.Select(x => x[index1]), data.Select(x => x[index2]), type);
 		}
 
 		/// <summary>
@@ -273,10 +257,7 @@ namespace Umebayashi.MathEx.Statistics
 		{
 			CheckArgument(data1, "data1");
 			CheckArgument(data2, "data2");
-			if (data1.Count() != data2.Count())
-			{
-				throw new InvalidOperationException("data1とdata2の要素数が異なるため共分散を計算できません");
-			}
+			CheckArgumentLength(data1, data2);
 
 			var cov = Covariance(data1, data2);
 			var sd1 = StdDev(data1);
@@ -290,19 +271,34 @@ namespace Umebayashi.MathEx.Statistics
 		/// </summary>
 		/// <param name="data"></param>
 		/// <returns></returns>
-		public static double Correlation(IEnumerable<VectorD> data)
+		public static double Correlation(IEnumerable<VectorD> data, int index1, int index2)
 		{
 			CheckArgument(data);
 
-			var len = data.First().Length;
-			var cov = Covariance(data);
-			var sds = new double[len];
-			for (int i = 0; i < len; i++)
-			{
-				sds[i] = StdDev(data.Select(x => x[i]));
-			}
+			return Correlation(data.Select(x => x[index1]), data.Select(x => x[index2]));
+		}
 
-			return cov / sds.Aggregate((a, s) => a * s);
+		/// <summary>
+		/// 順位相関係数
+		/// </summary>
+		/// <param name="data1"></param>
+		/// <param name="data2"></param>
+		/// <param name="type"></param>
+		/// <returns></returns>
+		public static double RankCorrelation(IEnumerable<double> data1, IEnumerable<double> data2, RankCorrelationType type)
+		{
+			CheckArgument(data1);
+			CheckArgument(data2);
+			CheckArgumentLength(data1, data2);
+
+			if (type == RankCorrelationType.Spearmans)
+			{
+				return RankCorrelation_Spearmans(data1, data2);
+			}
+			else
+			{
+				return RankCorrelation_Kendalls(data1, data2);
+			}
 		}
 
 		#endregion
@@ -340,6 +336,55 @@ namespace Umebayashi.MathEx.Statistics
 					throw new ArgumentException("vector length not match", parameterName);
 				}
 			}
+		}
+
+		private static void CheckArgumentLength(IEnumerable<double> data1, IEnumerable<double> data2)
+		{
+			if (data1.Count() != data2.Count())
+			{
+				throw new InvalidOperationException("data length not match");
+			}
+		}
+
+		/// <summary>
+		/// スピアマンの順位相関係数
+		/// </summary>
+		/// <param name="data1"></param>
+		/// <param name="data2"></param>
+		/// <returns></returns>
+		private static double RankCorrelation_Spearmans(IEnumerable<double> data1, IEnumerable<double> data2)
+		{
+			var len = data1.Count();
+			var d2 = data1.Select((x, i) => (x - data2.ElementAt(i)) * (x - data2.ElementAt(i))).Sum();
+			var value = 1.0 - ((6.0 * d2) / (len * (len * len - 1)));
+
+			return value;
+		}
+
+		/// <summary>
+		/// ケンドールの順位相関係数
+		/// </summary>
+		/// <param name="data1"></param>
+		/// <param name="data2"></param>
+		/// <returns></returns>
+		private static double RankCorrelation_Kendalls(IEnumerable<double> data1, IEnumerable<double> data2)
+		{
+			var d1 = data1.ToArray();
+			var d2 = data2.ToArray();
+			var cgen = new CombinationGenerator<int>();
+			var cmbs = cgen.Generate(Enumerable.Range(0, d1.Length), 2);
+			int p = 0;
+			foreach (var c in cmbs)
+			{
+				//if ((d1[c[0]] <= d1[c[1]]) && (d2[c[0]] <= d2[c[1]]))
+				if (d1[c[0]].CompareTo(d1[c[1]]) == d2[c[0]].CompareTo(d2[c[1]]))
+				{
+					p++;
+				}
+			}
+			var value = (4.0 * p) / (d1.Length * (d1.Length - 1)) - 1.0;
+
+			return value;
 		}
 
 		#endregion
@@ -396,5 +441,18 @@ namespace Umebayashi.MathEx.Statistics
 		/// フィッシャー法
 		/// </summary>
 		Fisher
+	}
+
+	public enum RankCorrelationType
+	{
+		/// <summary>
+		/// スピアマンの順位相関係数
+		/// </summary>
+		Spearmans,
+
+		/// <summary>
+		/// ケンドールの順位相関係数
+		/// </summary>
+		Kendalls
 	}
 }
