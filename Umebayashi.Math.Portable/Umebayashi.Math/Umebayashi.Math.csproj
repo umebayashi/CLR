@@ -8,7 +8,7 @@
     <ProjectGuid>{1E35BD30-CFC5-4093-BD96-12EC48424CB3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Umebayashi.Math</RootNamespace>
+    <RootNamespace>Umebayashi</RootNamespace>
     <AssemblyName>Umebayashi.Math</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile4</TargetFrameworkProfile>
@@ -45,6 +45,7 @@
     <Compile Include="MathEx\Collection.cs" />
     <Compile Include="MathEx\Complex.cs" />
     <Compile Include="MathEx\Matrix.cs" />
+    <Compile Include="MathEx\Prime.cs" />
     <Compile Include="MathEx\Random\Chi2Random.cs" />
     <Compile Include="MathEx\Random\FRandom.cs" />
     <Compile Include="MathEx\Random\GammaRandom.cs" />

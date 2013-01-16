@@ -60,6 +60,20 @@ namespace Umebayashi.MathEx
 		#endregion
 
 		[TestMethod]
+		public void TestPermutationCount()
+		{
+			var result = Combinatorics.PermutationCount(10, 5);
+			Assert.AreEqual<long>(30240, result);
+		}
+
+		[TestMethod]
+		public void TestCombinationCount()
+		{
+			var result = Combinatorics.CombinationCount(10, 5);
+			Assert.AreEqual<long>(252, result);
+		}
+
+		[TestMethod]
 		public void TestGenerateCombinationNotAllowDuplicate()
 		{
 			var generator = new CombinationGenerator<int>();

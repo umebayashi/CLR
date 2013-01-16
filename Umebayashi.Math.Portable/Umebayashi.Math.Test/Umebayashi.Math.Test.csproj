@@ -69,6 +69,7 @@
     <Compile Include="MathEx\Statistics\ClusterAnalysisTest.cs" />
     <Compile Include="MathEx\Statistics\ProbabilityDistributionTest.cs" />
     <Compile Include="MathEx\Statistics\RegressionAnalysisTest.cs" />
+    <Compile Include="MathEx\PrimeTest.cs" />
     <Compile Include="MathEx\VectorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

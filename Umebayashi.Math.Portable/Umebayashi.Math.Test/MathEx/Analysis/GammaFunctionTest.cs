@@ -21,7 +21,8 @@ namespace Umebayashi.MathEx.Analysis
 		[TestMethod]
 		public void TestP_Normal()
 		{
-			var p_normal = GammaFunction.P_Normal(-2.326347874);
+			//var p_normal = GammaFunction.P_Normal(-2.326347874);
+			var p_normal = GammaFunction.P_Normal(1.51);
 			Console.WriteLine(p_normal);
 		}
 	}

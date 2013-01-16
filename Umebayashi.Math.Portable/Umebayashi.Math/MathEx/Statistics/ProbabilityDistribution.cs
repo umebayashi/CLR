@@ -13,6 +13,8 @@ namespace Umebayashi.MathEx.Statistics
 	{
 		#region public method
 
+		#region 確率密度関数
+
 		/// <summary>
 		/// 二項分布
 		/// </summary>
@@ -24,6 +26,27 @@ namespace Umebayashi.MathEx.Statistics
 				(n.Factorial() / (x.Factorial() * (n - x).Factorial())) * 
 				Math.Pow(p, x) * 
 				Math.Pow(1 - p, n - x);
+		}
+
+		/// <summary>
+		/// 超幾何分布
+		/// </summary>
+		/// <param name="n_all"></param>
+		/// <param name="n_sample"></param>
+		/// <param name="p"></param>
+		/// <param name="x">確率変数</param>
+		/// <returns></returns>
+		public static double HyperGeometric(long n_all, long n_sample, double p, long x)
+		{
+			double v1 = Combinatorics.CombinationCount((long)(n_all * p), x);
+			double v2 = Combinatorics.CombinationCount(n_all - (long)(n_all * p), n_sample - x);
+			double v3 = Combinatorics.CombinationCount(n_all, n_sample);
+			return (v1 * v2) / v3;
+				//(
+				//	Combinatorics.CombinationCount((long)(n_all * p), x) *
+				//	Combinatorics.CombinationCount(n_all - (long)(n_all * p), n_sample - x)
+				//) /
+				//Combinatorics.CombinationCount(n_all, n_sample);
 		}
 
 		/// <summary>
@@ -109,6 +132,58 @@ namespace Umebayashi.MathEx.Statistics
 					Math.Pow(1 + n1n2 * x, (df1 + df2) / 2.0)
 				);
 		}
+
+		#endregion
+
+		#region 累積確率
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="m"></param>
+		/// <param name="s2"></param>
+		/// <param name="x_low"></param>
+		/// <param name="x_high"></param>
+		/// <returns></returns>
+		public static double NormalProbability(double m, double s2, double? x_low, double? x_high)
+		{
+			//標準化
+			double? low = null;
+			double? high = null;
+			if (x_low.HasValue)
+			{
+				low = (x_low - m) / Math.Sqrt(s2);
+			}
+			if (x_high.HasValue)
+			{
+				high = (x_high - m) / Math.Sqrt(s2);
+			}
+
+			if (low.HasValue)
+			{
+				if (high.HasValue)
+				{
+					return GammaFunction.P_Normal(high.Value) - GammaFunction.P_Normal(low.Value);
+				}
+				else
+				{
+					return 1.0 - GammaFunction.P_Normal(low.Value);
+				}
+			}
+			else
+			{
+				if (high.HasValue)
+				{
+					return GammaFunction.P_Normal(high.Value);
+				}
+				else
+				{
+					return 1.0;
+				}
+			}
+		}
+
+		#endregion
 
 		#endregion
 	}

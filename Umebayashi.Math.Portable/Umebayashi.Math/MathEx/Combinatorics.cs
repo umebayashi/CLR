@@ -7,6 +7,36 @@ using Umebayashi.MathEx.Algebra;
 
 namespace Umebayashi.MathEx
 {
+	public static class Combinatorics
+	{
+		/// <summary>
+		/// 順列の場合の数
+		/// </summary>
+		/// <param name="n"></param>
+		/// <param name="x"></param>
+		/// <returns></returns>
+		public static long PermutationCount(long n, long x)
+		{
+			long result = 1;
+			for (int i = 0; i < x; i++)
+			{
+				result = result * (n - i);
+			}
+			return result;
+		}
+
+		/// <summary>
+		/// 組合せの場合の数
+		/// </summary>
+		/// <param name="n"></param>
+		/// <param name="x"></param>
+		/// <returns></returns>
+		public static long CombinationCount(long n, long x)
+		{
+			return (long)(PermutationCount(n, x) / x.Factorial());
+		}
+	}
+
 	public abstract class CombinatoricsGenerator<T> where T: IEquatable<T>, IComparable<T>
 	{
 		public CombinatoricsGenerator()

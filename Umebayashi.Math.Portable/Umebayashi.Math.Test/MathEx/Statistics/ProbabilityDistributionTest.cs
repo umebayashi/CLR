@@ -27,6 +27,24 @@ namespace Umebayashi.MathEx.Statistics
 		}
 
 		[TestMethod]
+		public void TestHyperGeometric()
+		{
+			var n_all = 100;
+			var n_sample = 10;
+
+			for (double p = 0.1; p <= 1.0; p += 0.1)
+			{
+				Console.WriteLine("HyperGeometric(n_all = {0}, n_sample = {1}, p = {2})", n_all, n_sample, p);
+				for (int x = 0; x <= n_sample; x++)
+				{
+					var y = ProbabilityDistribution.HyperGeometric(n_all, n_sample, p, x);
+					OutputResult(x, y);
+				}
+				Console.WriteLine();
+			}
+		}
+
+		[TestMethod]
 		public void TestPoisson()
 		{
 			var lambda = 1;
@@ -94,6 +112,14 @@ namespace Umebayashi.MathEx.Statistics
 				var y = ProbabilityDistribution.F(4, 6, x);
 				OutputResult(x, y);
 			}
+		}
+
+		[TestMethod]
+		public void TestNormalProbability()
+		{
+			//var p = ProbabilityDistribution.NormalProbability(157.77, 5.14 * 5.14, 150.0, 160.0);
+			var p = ProbabilityDistribution.NormalProbability(0, 1, -1.51, 0.43);
+			Assert.AreEqual<double>(0.60088, Math.Round(p, 5));
 		}
 
 		private static void OutputResult(double x, double y)
