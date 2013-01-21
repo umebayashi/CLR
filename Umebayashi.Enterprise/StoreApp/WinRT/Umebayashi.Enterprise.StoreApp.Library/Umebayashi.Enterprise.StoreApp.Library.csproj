@@ -104,6 +104,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoreApp\UI\Validation\IValidateField.cs" />
+    <Compile Include="StoreApp\UI\Validation\ValidationManager.cs" />
+    <Compile Include="StoreApp\UI\Validation\ValidationRule.cs" />
+    <Compile Include="StoreApp\UI\Validation\ValidationRuleCollection.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
