@@ -34,13 +34,11 @@ namespace Umebayashi.Enterprise.StoreApp.ValidationSample
 
 		private int _rangeValueTarget;
 
-		[Range(0, 100)]
 		public int RangeValueTarget
 		{
 			get { return _rangeValueTarget; }
 			set
 			{
-				Validator.ValidateProperty(value, new ValidationContext(this) { MemberName = "RangeValueTarget" });
 				this.SetValue<int>(ref _rangeValueTarget, value, "RangeValueTarget");
 			}
 		}

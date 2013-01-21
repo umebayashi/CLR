@@ -10,6 +10,8 @@ namespace Umebayashi.Enterprise.StoreApp.UI.Validation
 {
 	public class ValidationManager : DependencyObject
 	{
+		#region field / property
+
 		public static readonly DependencyProperty ValidationRulesProperty = DependencyProperty.RegisterAttached(
 			"ValidationRules",
 			typeof(ValidationRuleCollection),
@@ -25,5 +27,18 @@ namespace Umebayashi.Enterprise.StoreApp.UI.Validation
 		{
 			target.SetValue(ValidationRulesProperty, value);
 		}
+
+		#endregion
+
+		#region method
+
+		public static void Validate(DependencyObject target)
+		{
+			var rules = GetValidationRules(target);
+			foreach (var rule in rules)
+			{
+			}
+		}
+		#endregion
 	}
 }
