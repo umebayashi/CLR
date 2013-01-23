@@ -10,6 +10,10 @@ namespace Umebayashi.Enterprise.StoreApp.UI.Validation
 {
 	public abstract class ValidationRule : DependencyObject
 	{
+		public virtual void Validate(object targetValue)
+		{
+			throw new NotImplementedException();
+		}
 	}
 
 	public class CompareValidationRule : ValidationRule
@@ -58,6 +62,15 @@ namespace Umebayashi.Enterprise.StoreApp.UI.Validation
 		{
 			get { return (ValidationDataType)this.GetValue(DataTypeProperty); }
 			set { this.SetValue(DataTypeProperty, value); }
+		}
+
+		#endregion
+
+		#region method
+
+		public override void Validate(object targetValue)
+		{
+			//base.Validate(args);
 		}
 
 		#endregion

@@ -67,7 +67,7 @@
 					</lib:ValidationRuleCollection>
 				</lib:ValidationManager.ValidationRules>
 			</TextBox>
-			<Button Grid.Row="3" Grid.Column="2" x:Name="btnRangeSubmit" Width="80" Height="50" HorizontalAlignment="Left" Margin="170,0,10,0" Content="チェック" />
+			<Button Grid.Row="3" Grid.Column="2" x:Name="btnRangeSubmit" Width="80" Height="50" HorizontalAlignment="Left" Margin="170,0,10,0" Content="チェック" Click="btnRangeSubmit_Click_1" />
 
 			<TextBox Grid.Row="4" Grid.Column="1" x:Name="txtRegexValue" Width="400" Height="25" HorizontalAlignment="Left" Margin="10,10,10,10" />
 			<TextBox Grid.Row="4" Grid.Column="2" x:Name="txtRegexTarget" Width="150" Height="25" HorizontalAlignment="Left" Margin="10,10,10,10" />

@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Umebayashi.Enterprise.StoreApp.UI.Validation;
 
 // 空白ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234238 を参照してください
 
@@ -34,5 +35,10 @@ namespace Umebayashi.Enterprise.StoreApp.ValidationSample
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+		private void btnRangeSubmit_Click_1(object sender, RoutedEventArgs e)
+		{
+			ValidationManager.Validate(txtRangeTarget);
+		}
     }
 }
