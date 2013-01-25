@@ -100,13 +100,15 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Folder Include="StoreApp\UI\View\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StoreApp\UI\Validation\IValidateField.cs" />
-    <Compile Include="StoreApp\UI\Validation\ValidationManager.cs" />
-    <Compile Include="StoreApp\UI\Validation\ValidationRule.cs" />
-    <Compile Include="StoreApp\UI\Validation\ValidationRuleCollection.cs" />
+    <Compile Include="StoreApp\UI\Converter\ValidationResultCollectionConnverter.cs" />
+    <Compile Include="StoreApp\UI\Validation\ValidateOnChangeAttribute.cs" />
+    <Compile Include="StoreApp\UI\Validation\ValidationPropertyAttribute.cs" />
+    <Compile Include="StoreApp\UI\ViewModel\BaseViewModel.cs" />
+    <Compile Include="StoreApp\UI\ViewModel\ValidationViewModel.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

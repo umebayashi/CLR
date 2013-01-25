@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using Windows.Foundation;
@@ -38,7 +40,8 @@ namespace Umebayashi.Enterprise.StoreApp.ValidationSample
 
 		private void btnRangeSubmit_Click_1(object sender, RoutedEventArgs e)
 		{
-			ValidationManager.Validate(txtRangeTarget);
+			var results = this.ViewModel.ValidateProperty("RangeValueTarget");
+			this.ViewModel.RangeValueValidationResults = new ObservableCollection<ValidationResult>(results);
 		}
     }
 }
